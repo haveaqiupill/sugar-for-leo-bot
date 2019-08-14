@@ -80,7 +80,7 @@ def start(bot, update):
         menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
         mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-        mainmenutext += "Welcome to Sugar for Leo!" + LION + "What do you want to do?"
+        mainmenutext += "Welcome to Sugar for Leo! " + LION + "\n" + "What do you want to do?"
 
         # set up INFOSTORE
         INFOSTORE[user.id] = {}
@@ -106,8 +106,7 @@ def send_to_parent(bot, update):
     button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
-    sendtext = "<b>When must the food be consumed by?</b>"
-    sendtext = "\n\nType and send me the time below:"
+    sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
 
     bot.editMessageText(text=sendtext,
                         chat_id=query.message.chat_id,
@@ -167,7 +166,7 @@ def send_to_baby(bot, update):
     # deletes message sent previously by bot
     bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
-    bot.send_message(text="Please send your feedback in text below! We appreciate your feedback, thank you!",
+    bot.send_message(text="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:",
                      chat_id=query.message.chat_id,
                      message_id=query.message.message_id,
                      parse_mode=ParseMode.HTML)
@@ -184,7 +183,7 @@ def cancel(bot, update):
     # deletes message sent previously by bot
     bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
-    bot.send_message(text="Byebye!" + SMILEY + "Hope to hear form you soon! Press /start anytime to continue.",
+    bot.send_message(text="Byebye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
                      chat_id=query.message.chat_id,
                      message_id=query.message.message_id,
                      parse_mode=ParseMode.HTML)

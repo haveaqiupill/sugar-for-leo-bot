@@ -10,8 +10,8 @@ TELEGRAM_TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
 
 # Set up admin groups
 admin_group_id = '-1001199257588'
-food_channel_id = '@nsefoodbottestchannel'
-admin_user_ids = [250741897, ]  # cpf, nich, yt
+food_channel_id = '@SugarForLeoBot'
+admin_user_ids = [508423467, ]  # jingying
 
 # Set up logging
 logging.basicConfig(
@@ -23,6 +23,19 @@ logger = logging.getLogger(__name__)
 
 # set up temporary store of info
 INFOSTORE = {}
+
+# EMOJI UNICODE
+CAKE = u"\U0001F382"
+WHALE = u"\U0001F40B"
+ROBOT = u"\U0001F916"
+SKULL = u"\U0001F480"
+SMILEY = u"\U0001F642"
+SPOUTING_WHALE = u"\U0001F433"
+SPEECH_BUBBLE = u"\U0001F4AC"
+THINKING_FACE = u"\U0001F914"
+QUESTION_MARK = u"\U0001F64F"
+MONKEY = u"\U0001F64A"
+LION = 	u"\U0001F981"
 
 
 # Function to build buttons menu for every occasion
@@ -60,14 +73,14 @@ def start(bot, update):
     else:
         logger.info("User {} with User ID {} just started conversation with bot.".format(
             user.username if user.username else user.first_name, user.id))
-        button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='foodrescue'),
-                       InlineKeyboardButton(text='Talk to my sugar baby', callback_data='feedback'),
+        button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
+                       InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
                        InlineKeyboardButton(text='Cancel', callback_data='cancel')]
 
         menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
         mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-        mainmenutext += "What do you want to do?"
+        mainmenutext += "Welcome to Sugar for Leo!" + LION + "What do you want to do?"
 
         # set up INFOSTORE
         INFOSTORE[user.id] = {}
@@ -85,7 +98,7 @@ def start(bot, update):
     return AFTER_START
 
 
-def submit_consume_time(bot, update):
+def send_to_parent(bot, update):
     query = update.callback_query
     user = query.from_user
     logger.info("User {} has just started food rescue".format(user.username if user.username else user.first_name))
@@ -146,7 +159,7 @@ def submit_halal_cert(bot, update):
     return ConversationHandler.END
 
 
-def send_feedback(bot, update):
+def send_to_baby(bot, update):
     query = update.callback_query
     user = query.from_user
     logger.info("User {} wants to send feedback.".format(user.username if user.username else user.first_name))
@@ -171,7 +184,7 @@ def cancel(bot, update):
     # deletes message sent previously by bot
     bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
-    bot.send_message(text="Bye! Talk to me again if you have excess food to share! Press /start anytime to begin.",
+    bot.send_message(text="Byebye!" + SMILEY + "Hope to hear form you soon! Press /start anytime to continue.",
                      chat_id=query.message.chat_id,
                      message_id=query.message.message_id,
                      parse_mode=ParseMode.HTML)
@@ -195,8 +208,8 @@ def main():
         entry_points=[CommandHandler('start', start)],
 
         states={
-            AFTER_START: [CallbackQueryHandler(callback=submit_consume_time, pattern='^(foodrescue)$'),
-                          CallbackQueryHandler(callback=send_feedback, pattern='^(feedback)$'),
+            AFTER_START: [CallbackQueryHandler(callback=send_to_parent, pattern='^(toparent)$'),
+                          CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
             CONSUME_TIME: [MessageHandler(Filters.text, submit_halal_cert),

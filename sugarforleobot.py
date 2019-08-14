@@ -60,14 +60,14 @@ def start(bot, update):
     else:
         logger.info("User {} with User ID {} just started conversation with bot.".format(
             user.username if user.username else user.first_name, user.id))
-        button_list = [InlineKeyboardButton(text='Food Rescue!', callback_data='foodrescue'),
-                       InlineKeyboardButton(text='Feedback', callback_data='feedback'),
+        button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='foodrescue'),
+                       InlineKeyboardButton(text='Talk to my sugar baby', callback_data='feedback'),
                        InlineKeyboardButton(text='Cancel', callback_data='cancel')]
 
         menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
         mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-        mainmenutext += "Do you have free food to share with the community?"
+        mainmenutext += "What do you want to do?"
 
         # set up INFOSTORE
         INFOSTORE[user.id] = {}

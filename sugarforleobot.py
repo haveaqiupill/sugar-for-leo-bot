@@ -1,14 +1,4 @@
-﻿from time import sleep
-import logging
-import os
-import html
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackQueryHandler
-
-# Set up telegram token 
-TELEGRAM_TOKEN = os.environ['SFL_TOKEN']
-
-import json  # JSON lib
+﻿import json  # JSON lib
 import requests  # HTTP lib
 import os  # used to access env variables
 import time

@@ -9,8 +9,8 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Conve
 TELEGRAM_TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
 
 # Set up admin groups
-admin_group_id = '-1001199257588'
-food_channel_id = '@SugarForLeoBot'
+admin_group_id = '-361131404'
+sfl_channel_id = '@SugarForLeoBot'
 admin_user_ids = [508423467, 384865431]  # jingying, keryin
 
 # Set up logging
@@ -49,7 +49,7 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
 
 
 # Set up unique conversation states
-(AFTER_START, CONSUME_TIME) = range(2)
+(AFTER_START, FORWARD_MESSAGE) = range(2)
 
 maintenance = 0
 
@@ -102,33 +102,10 @@ def send_to_parent(bot, update):
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
-    return CONSUME_TIME
+    return FORWARD_MESSAGE
 
 
 def forward_to_party(bot, update):
-    try:
-        user = update.message.from_user
-        consume_time = html.escape(update.message.text.strip())
-        INFOSTORE[user.id]["food"]["consume_time"] = consume_time
-        logger.info(
-            "User {} has just submitted food consume time".format(user.username if user.username else user.first_name))
-        chatid = update.message.chat.id
-        datashown = html.escape(update.message.text.strip())
-
-        # deletes message sent by bot
-        bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
-
-    # catch error due to back button:
-    except AttributeError:
-        query = update.callback_query
-        user = query.from_user
-        chatid = query.message.chat_id
-        datashown = query.data
-        logger.info('Data: query {}'.format(datashown))
-
-        # deletes message previously sent by bot due to back
-        bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
-
     button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
                    InlineKeyboardButton(text='exit', callback_data='cancel')]
 
@@ -145,7 +122,7 @@ def forward_to_party(bot, update):
 
     return ConversationHandler.END
 
-def continue(bot, update):
+def _continue(bot, update):
 
     return AFTER_START
 
@@ -202,7 +179,7 @@ def main():
                           CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            CONSUME_TIME: [MessageHandler(Filters.text, forward_to_party),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
                            CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

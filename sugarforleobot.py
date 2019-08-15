@@ -101,17 +101,14 @@ def send_to_parent(bot, update):
                         message_id=query.message.message_id,
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
-    global update_id
-    # Request updates after the last update_id
-    for update in bot.get_updates(offset=update_id, timeout=10):
-        update_id = update.update_id + 1
 
-        if update.message:  # your bot can receive updates without messages
-            # Reply to the message
-            update.message.reply_text(update.message.text)
+    dp.add_handler(MessageHandler(Filters.text, echo))
 
-    #return forward_to_party()
+    return forward_to_party()
 
+def echo(update, context):
+    """Echo the user message."""
+    update.message.reply_text(update.message.text)
 
 def forward_to_party(bot, update):
     button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),

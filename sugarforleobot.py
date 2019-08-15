@@ -80,7 +80,7 @@ def start(bot, update):
         menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
         mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-        mainmenutext += "Welcome to Sugar for Leo! " + LION + "\n" + "What do you want to do?"
+        mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + "What do you want to do?"
 
         # set up INFOSTORE
         INFOSTORE[user.id] = {}
@@ -117,7 +117,7 @@ def send_to_parent(bot, update):
     return CONSUME_TIME
 
 
-def submit_halal_cert(bot, update):
+def forward_to_party(bot, update):
     try:
         user = update.message.from_user
         consume_time = html.escape(update.message.text.strip())
@@ -141,11 +141,11 @@ def submit_halal_cert(bot, update):
         # deletes message previously sent by bot due to back
         bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
-    button_list = [InlineKeyboardButton(text='Yes, it is Halal Certified.', callback_data='halalyes'),
-                   InlineKeyboardButton(text='No, it is not.', callback_data='halalno')]
+    button_list = [InlineKeyboardButton(text='continue', callback_data='continue'),
+                   InlineKeyboardButton(text='exit', callback_data='cancel')]
 
     menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
-    sendtext = "Previous selection: {}.\n\n<b>Is the food Halal Certified?</b>".format(datashown)
+    sendtext = "Message: {}.\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(datashown)
 
     msgsent = bot.send_message(text=sendtext,
                                reply_markup=InlineKeyboardMarkup(menu),
@@ -157,6 +157,9 @@ def submit_halal_cert(bot, update):
 
     return ConversationHandler.END
 
+def continue(bot, update):
+
+    return AFTER_START
 
 def send_to_baby(bot, update):
     query = update.callback_query
@@ -211,7 +214,7 @@ def main():
                           CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            CONSUME_TIME: [MessageHandler(Filters.text, submit_halal_cert),
+            CONSUME_TIME: [MessageHandler(Filters.text, forward_to_party),
                            CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

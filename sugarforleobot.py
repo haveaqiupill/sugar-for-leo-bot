@@ -11,7 +11,7 @@ TELEGRAM_TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
 # Set up admin groups
 admin_group_id = '-1001199257588'
 food_channel_id = '@SugarForLeoBot'
-admin_user_ids = [508423467, ]  # jingying
+admin_user_ids = [508423467, 384865431]  # jingying, keryin
 
 # Set up logging
 logging.basicConfig(
@@ -141,7 +141,7 @@ def forward_to_party(bot, update):
         # deletes message previously sent by bot due to back
         bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
-    button_list = [InlineKeyboardButton(text='continue', callback_data='continue'),
+    button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
                    InlineKeyboardButton(text='exit', callback_data='cancel')]
 
     menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
@@ -157,7 +157,7 @@ def forward_to_party(bot, update):
 
     return ConversationHandler.END
 
-def continue(bot, update):
+def _continue(bot, update):
 
     return AFTER_START
 

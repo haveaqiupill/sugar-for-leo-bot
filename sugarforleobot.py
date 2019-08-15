@@ -101,8 +101,16 @@ def send_to_parent(bot, update):
                         message_id=query.message.message_id,
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
+    global update_id
+    # Request updates after the last update_id
+    for update in bot.get_updates(offset=update_id, timeout=10):
+        update_id = update.update_id + 1
 
-    return forward_to_party()
+        if update.message:  # your bot can receive updates without messages
+            # Reply to the message
+            update.message.reply_text(update.message.text)
+
+    #return forward_to_party()
 
 
 def forward_to_party(bot, update):

@@ -102,7 +102,7 @@ def send_to_parent(bot, update):
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
-    return FORWARD_MESSAGE
+    return forward_to_party()
 
 
 def forward_to_party(bot, update):
@@ -131,6 +131,9 @@ def send_to_baby(bot, update):
     user = query.from_user
     logger.info("User {} wants to send feedback.".format(user.username if user.username else user.first_name))
 
+    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+
     # deletes message sent previously by bot
     bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
@@ -139,7 +142,7 @@ def send_to_baby(bot, update):
                      message_id=query.message.message_id,
                      parse_mode=ParseMode.HTML)
 
-    return ConversationHandler.END
+    return forward_to_party()
 
 
 # for user cancelling

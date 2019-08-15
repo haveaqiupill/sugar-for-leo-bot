@@ -145,7 +145,7 @@ def forward_to_party(bot, update):
 
     return ConversationHandler.END
 
-def _continue(bot, update):
+def continue(bot, update):
 
     return AFTER_START
 

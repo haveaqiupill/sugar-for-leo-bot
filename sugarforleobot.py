@@ -59,41 +59,29 @@ def start(bot, update):
     chatid = update.message.chat.id
     logger.info(update.message.text.strip())
 
-    if maintenance == 1:
-        logger.info("MAINTENANCE replied to {}".format(user.username if user.username else user.first_name))
-        replytext = "Sorry, we are currently in maintenance, do check back for more free food!"
-        replytext += "\n\nYour user ID = {}, chat ID = {}".format(str(user.id) if user.id else str(chatid), str(chatid))
-
-        bot.send_message(text=replytext,
-                         parse_mode=ParseMode.HTML,
-                         chat_id=chatid)
-
-        return ConversationHandler.END
-
-    else:
-        logger.info("User {} with User ID {} just started conversation with bot.".format(
-            user.username if user.username else user.first_name, user.id))
-        button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
+    logger.info("User {} with User ID {} just started conversation with bot.".format(
+        user.username if user.username else user.first_name, user.id))
+    button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
                        InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
                        InlineKeyboardButton(text='Cancel', callback_data='cancel')]
 
-        menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
-        mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-        mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + "What do you want to do?"
+    mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
+    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + "What do you want to do?"
 
-        # set up INFOSTORE
-        INFOSTORE[user.id] = {}
-        INFOSTORE[user.id]['food'] = {}
-        INFOSTORE[user.id]["BotMessageID"] = []
+    # set up INFOSTORE
+    INFOSTORE[user.id] = {}
+    INFOSTORE[user.id]['food'] = {}
+    INFOSTORE[user.id]["BotMessageID"] = []
 
-        msgsent = bot.send_message(text=mainmenutext,
+    msgsent = bot.send_message(text=mainmenutext,
                                    chat_id=chatid,
                                    reply_markup=InlineKeyboardMarkup(menu),
                                    parse_mode=ParseMode.HTML)
 
-        # appends message sent by bot itself - the very first message: start message
-        INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
+    # appends message sent by bot itself - the very first message: start message
+    INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
 
     return AFTER_START
 

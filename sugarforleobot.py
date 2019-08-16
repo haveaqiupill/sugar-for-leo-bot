@@ -104,18 +104,18 @@ def send_to_parent(bot, update):
 
 
 
-    return forward_to_party()
+    return FORWARD_MESSAGE
 
 def echo(update, context):
     """Echo the user message."""
     update.message.reply_text(update.message.text)
 
-def forward_to_party(bot, update):
+def forward_to_party(message):
     button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
                    InlineKeyboardButton(text='exit', callback_data='cancel')]
 
     menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
-    sendtext = "Message: {}.\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(datashown)
+    sendtext = "Message: {}." + message + "\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(datashown)
 
     msgsent = bot.send_message(text=sendtext,
                                reply_markup=InlineKeyboardMarkup(menu),
@@ -150,7 +150,7 @@ def send_to_baby(bot, update):
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
-    return forward_to_party()
+    return FORWARD_MESSAGE
 
 
 # for user cancelling
@@ -190,7 +190,7 @@ def main():
                           CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, echo),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, echo, pass_user_data = true),
                            CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

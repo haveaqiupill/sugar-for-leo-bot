@@ -102,7 +102,23 @@ def send_to_parent(bot, update):
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
+    return FORWARD_MESSAGE
 
+def send_to_baby(bot, update):
+    query = update.callback_query
+    user = query.from_user
+    logger.info("User {} has just started food rescue".format(user.username if user.username else user.first_name))
+
+    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+
+    sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
+
+    bot.editMessageText(text=sendtext,
+                        chat_id=query.message.chat_id,
+                        message_id=query.message.message_id,
+                        reply_markup=InlineKeyboardMarkup(menu),
+                        parse_mode=ParseMode.HTML)
 
     return FORWARD_MESSAGE
 
@@ -130,27 +146,6 @@ def forward_to_party(message):
 def _continue(bot, update):
 
     return AFTER_START
-
-def send_to_baby(bot, update):
-    query = update.callback_query
-    user = query.from_user
-    logger.info("User {} wants to send feedback.".format(user.username if user.username else user.first_name))
-
-    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
-    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
-
-    # deletes message sent previously by bot
-    bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
-
-    sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
-
-    bot.editMessageText(text=sendtext,
-                        chat_id=query.message.chat_id,
-                        message_id=query.message.message_id,
-                        reply_markup=InlineKeyboardMarkup(menu),
-                        parse_mode=ParseMode.HTML)
-
-    return FORWARD_MESSAGE
 
 
 # for user cancelling

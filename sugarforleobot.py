@@ -33,4 +33,5 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
+bot = telegram.Bot(token=TELEGRAM_TOKEN)
 print(bot.get_me())

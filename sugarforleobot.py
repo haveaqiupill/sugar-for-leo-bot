@@ -91,7 +91,7 @@ def send_to_parent(bot, update):
     user = query.from_user
     logger.info("User {} has just started food rescue".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Done', callback_data='forward_to_party'),
+    button_list = [InlineKeyboardButton(text='Done', callback_data='forward'),
                    InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
@@ -110,7 +110,7 @@ def send_to_baby(bot, update):
     user = query.from_user
     logger.info("User {} has just started food rescue".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Done', callback_data='forward_to_party'),
+    button_list = [InlineKeyboardButton(text='Done', callback_data='forward'),
                    InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
@@ -210,6 +210,7 @@ def main():
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
             FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
+                              CallbackQueryHandler(callback=forward_to_party, pattern='^(forward)$')
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

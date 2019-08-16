@@ -201,7 +201,6 @@ def main():
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
             FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
-                              CallbackQueryHandler(callback=forward_to_party, pattern='^(forward)$'),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

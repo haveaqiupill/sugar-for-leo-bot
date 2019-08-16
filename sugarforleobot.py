@@ -131,6 +131,8 @@ def forward_to_party(message):
                    InlineKeyboardButton(text='exit', callback_data='cancel')]
 
     menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
+
+    text = update.message.from_user
     sendtext = "Message: {}." + message + "\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(datashown)
 
     msgsent = bot.send_message(text=sendtext,
@@ -186,7 +188,8 @@ def main():
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
             FORWARD_MESSAGE: [MessageHandler(Filters.text, echo),
-                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
+                              CallbackQueryHandler(callback=forward_to_party, pattern='^(forward)$'),
+                              CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],
         allow_reentry=True

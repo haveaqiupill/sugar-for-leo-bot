@@ -102,7 +102,7 @@ def send_to_parent(bot, update):
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
-    dp.add_handler(MessageHandler(Filters.text, echo))
+
 
     return forward_to_party()
 
@@ -142,10 +142,13 @@ def send_to_baby(bot, update):
     # deletes message sent previously by bot
     bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
-    bot.send_message(text="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:",
-                     chat_id=query.message.chat_id,
-                     message_id=query.message.message_id,
-                     parse_mode=ParseMode.HTML)
+    sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
+
+    bot.editMessageText(text=sendtext,
+                        chat_id=query.message.chat_id,
+                        message_id=query.message.message_id,
+                        reply_markup=InlineKeyboardMarkup(menu),
+                        parse_mode=ParseMode.HTML)
 
     return forward_to_party()
 
@@ -179,7 +182,7 @@ def main():
     dispatcher = updater.dispatcher
 
     # set up conversation handling for user side (for sending food)
-    food_conv_handler = ConversationHandler(
+    conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
 
         states={
@@ -187,7 +190,7 @@ def main():
                           CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, echo),
                            CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],
@@ -195,7 +198,7 @@ def main():
     )
 
     # dispatch the food convo handler
-    dispatcher.add_handler(food_conv_handler)
+    dispatcher.add_handler(conv_handler)
 
     # logs all errors
     dispatcher.add_error_handler(error)

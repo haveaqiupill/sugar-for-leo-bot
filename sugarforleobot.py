@@ -27,19 +27,6 @@ logger = logging.getLogger(__name__)
 # set up temporary store of info
 INFOSTORE = {}
 
-# EMOJI UNICODE
-CAKE = u"\U0001F382"
-WHALE = u"\U0001F40B"
-ROBOT = u"\U0001F916"
-SKULL = u"\U0001F480"
-SMILEY = u"\U0001F642"
-SPOUTING_WHALE = u"\U0001F433"
-SPEECH_BUBBLE = u"\U0001F4AC"
-THINKING_FACE = u"\U0001F914"
-QUESTION_MARK = u"\U0001F64F"
-MONKEY = u"\U0001F64A"
-LION = 	u"\U0001F981"
-
 
 # Function to build buttons menu for every occasion
 def build_menu(buttons, n_cols, header_buttons, footer_buttons):
@@ -130,7 +117,6 @@ def send_to_baby(bot, update):
 
 
 def forward_to_party(bot, update):
-
     try:
         user = update.message.from_user
         message_to_send = html.escape(update.message.text.strip())

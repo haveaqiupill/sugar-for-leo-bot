@@ -123,8 +123,8 @@ def send_to_baby(bot, update):
     return FORWARD_MESSAGE
 
 def echo(update, context):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
+
 
 def forward_to_party(message):
     button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),

@@ -190,7 +190,7 @@ def main():
                           CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, echo, pass_user_data = true),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, echo),
                            CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

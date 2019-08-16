@@ -91,7 +91,8 @@ def send_to_parent(bot, update):
     user = query.from_user
     logger.info("User {} has just started food rescue".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    button_list = [InlineKeyboardButton(text='Done', callback_data='forward_to_party'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
@@ -109,7 +110,8 @@ def send_to_baby(bot, update):
     user = query.from_user
     logger.info("User {} has just started food rescue".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    button_list = [InlineKeyboardButton(text='Done', callback_data='forward_to_party'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
@@ -122,18 +124,38 @@ def send_to_baby(bot, update):
 
     return FORWARD_MESSAGE
 
-def echo(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
+
+def forward_to_party(bot, update):
+    try:
+        user = update.message.from_user
+        message_to_send = html.escape(update.message.text.strip())
+        logger.info(
+            "User {} has just submitted message".format(user.username if user.username else user.first_name))
+        chatid = update.message.chat.id
+        datashown = html.escape(update.message.text.strip())
+
+        # deletes message sent by bot
+        bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
 
-def forward_to_party(message):
+    # catch error due to back button:
+    except AttributeError:
+        query = update.callback_query
+        user = query.from_user
+        chatid = query.message.chat_id
+        datashown = query.data
+        logger.info('Data: query {}'.format(datashown))
+
+        # deletes message previously sent by bot due to back
+        bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
+
     button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
                    InlineKeyboardButton(text='exit', callback_data='cancel')]
 
     menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
 
-    text = update.message.from_user
-    sendtext = "Message: {}." + message + "\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(datashown)
+    sendtext = "Message: {}." + message + "\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(
+        datashown)
 
     msgsent = bot.send_message(text=sendtext,
                                reply_markup=InlineKeyboardMarkup(menu),
@@ -159,7 +181,7 @@ def cancel(bot, update):
     # deletes message sent previously by bot
     bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
-    bot.send_message(text="Byebye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
+    bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
                      chat_id=query.message.chat_id,
                      message_id=query.message.message_id,
                      parse_mode=ParseMode.HTML)
@@ -187,8 +209,7 @@ def main():
                           CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, echo),
-                              CallbackQueryHandler(callback=forward_to_party, pattern='^(forward)$'),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

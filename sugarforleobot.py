@@ -133,12 +133,11 @@ def feed(bot, update):
                      text='reply this message')
     # forward user message to group
     # note: group ID with the negative sign
-    bot.forward_message(chat_id='-1010101001010',
+    bot.forward_message(chat_id='-361131404',
                         from_chat_id=update.message.chat_id,
                         message_id=update.message.message_id)
 
 def forward_to_party(bot, update):
-
     try:
         user = update.message.from_user
         message_to_send = html.escape(update.message.text.strip())
@@ -222,7 +221,7 @@ def main():
                           CallbackQueryHandler(callback=send_to_baby, pattern='^(tobaby)$'),
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, feed),
                               CallbackQueryHandler(callback=feed, pattern='^(forward)$'),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 

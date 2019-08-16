@@ -135,7 +135,7 @@ def forward_to_party(bot, update):
         datashown = html.escape(update.message.text.strip())
 
         # deletes message sent by bot
-        bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
+        # bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
 
     # catch error due to back button:
@@ -147,7 +147,7 @@ def forward_to_party(bot, update):
         logger.info('Data: query {}'.format(datashown))
 
         # deletes message previously sent by bot due to back
-        bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
+        # bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
     button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
                    InlineKeyboardButton(text='exit', callback_data='cancel')]
@@ -179,7 +179,7 @@ def cancel(bot, update):
     logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
 
     # deletes message sent previously by bot
-    bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
+    # bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
     bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
                      chat_id=query.message.chat_id,
@@ -210,7 +210,7 @@ def main():
                           CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
             FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
-                              CallbackQueryHandler(callback=forward_to_party, pattern='^(forward)$')
+                              CallbackQueryHandler(callback=forward_to_party, pattern='^(forward)$'),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

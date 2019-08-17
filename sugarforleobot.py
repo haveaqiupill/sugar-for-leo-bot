@@ -113,8 +113,7 @@ def send_to_baby(bot, update):
     user = query.from_user
     logger.info("User {} has just chose to talk to the sugar baby".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Done', callback_data='forward'),
-                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
@@ -125,24 +124,23 @@ def send_to_baby(bot, update):
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
-    message = update.message.from_user
-    INFOSTORE[user.id]["BotMessageID"] = message
-    
+
+
     return FORWARD_MESSAGE
 
-def forward_to_party(bot, update):
+def _forward_to_party(bot, update):
+    message = update.message.from_user
+    INFOSTORE[user.id]["BotMessageID"] = message
+
     button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
                    InlineKeyboardButton(text='exit', callback_data='cancel')]
 
     menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
-    message = INFOSTORE[user.id]["message"]
     sendtext = "Message: {}." + message + "\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(
         datashown)
 
-    msgsent = bot.send_message(text=sendtext,
-                               reply_markup=InlineKeyboardMarkup(menu),
-                               chat_id=chatid,
-                               parse_mode=ParseMode.HTML)
+    msgsent = update.message.reply_text(text=sendtext,
+                               reply_markup=ReplyKeyboardMarkup(menu, one_time_keyboard=True))
 
     # appends message sent by bot itself
     INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
@@ -194,7 +192,7 @@ def main():
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
 
         fallbacks=[CommandHandler('cancel', cancel)],

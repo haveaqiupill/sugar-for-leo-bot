@@ -35,6 +35,7 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
 
 def start(update, context):
     context.bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
+    return ConversationHandler.END
 
 def main():
     updater = Updater(TELEGRAM_TOKEN)

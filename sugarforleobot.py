@@ -119,10 +119,7 @@ def send_to_baby(bot, update):
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
     update.message.reply_text(text=sendtext,
-                        chat_id=query.message.chat_id,
-                        message_id=query.message.message_id,
-                        reply_markup=InlineKeyboardMarkup(menu),
-                        parse_mode=ParseMode.HTML)
+                        reply_markup=ReplyKeyboardMarkup(menu, one_time_keyboard=True))
 
 
 

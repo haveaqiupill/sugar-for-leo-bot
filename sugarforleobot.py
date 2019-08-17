@@ -50,10 +50,6 @@ def start(bot, update):
 
     mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
     mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n\n"
-
-    # appends message sent by bot itself - the very first message: start message
-    INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
-
     bot.send_message(text=mainmenutext,
                      parse_mode=ParseMode.HTML,
                      chat_id=chatid)
@@ -136,9 +132,6 @@ def _forward_to_party(bot, update):
     reply_keyboard = [['Continue',"Exit"]]
     user = update.message.from_user
     logger.info("Message of %s: %s", user.first_name, update.message.text)
-    
-    bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
-
     update.message.reply_text('Thank you! Your message has been forwarded. What do you want to do next?',
                               reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
 

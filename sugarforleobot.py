@@ -181,9 +181,9 @@ def main():
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')],
 
             FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party),
-                              CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]
+                              CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
             CONTINUE: [RegexHandler('^(Continue)$', consent),
-                       RegexHandler('^(Exit)$', cancel) ]
+                       RegexHandler('^(Exit)$', cancel)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel)],

@@ -39,17 +39,19 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
 
 CONSENT, PHOTO, LOCATION, BIO = range(4)
 
+# set up temporary store of info
+INFOSTORE = {}
 
 def start(bot, update):
     reply_keyboard = [['I consent']]
     user = update.message.from_user
-    
+
     mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
     mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n"
 
     update.message.reply_text(
         mainmenutext + '\n' +
-        'Firstly, please gimme consent :(\n' 
+        'Firstly, please gimme consent for data collection thankiew\n\n' 
         'I consent to providing my personal data for the purpose of Leo House Events. '
         'I would also agree to receive important updates pertaining to matters contained in this survey. '
         'All personal information will be kept confidential and be used only for the purpose of Leo House Events. '

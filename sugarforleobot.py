@@ -68,7 +68,7 @@ def start(bot, update):
 
 def consent(bot, update):
     user = update.message.from_user
-    logger.info("User %s: %s", user.first_name, update.message.text)
+    logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
     update.message.reply_text('Thank you for your consent! Please send me a photo of yourself, '
                               'so I know what you look like, or send /skip if you don\'t want to.',
                               reply_markup=ReplyKeyboardRemove())
@@ -101,8 +101,8 @@ def location(bot, update):
     user_location = update.message.location
     logger.info("Location of %s: %f / %f", user.first_name, user_location.latitude,
                 user_location.longitude)
-    update.message.reply_text('Maybe I can visit you sometime! '
-                              'At last, tell me something about yourself.')
+    update.message.reply_text('Maybe I can visit your room sometime! '
+                              'At last, tell me something interesting about yourself.')
 
     return BIO
 
@@ -111,7 +111,7 @@ def skip_location(bot, update):
     user = update.message.from_user
     logger.info("User %s did not send a location.", user.first_name)
     update.message.reply_text('You seem a bit paranoid! '
-                              'At last, tell me something about yourself.')
+                              'At last, tell me something interesting about yourself.')
 
     return BIO
 
@@ -119,7 +119,7 @@ def skip_location(bot, update):
 def bio(bot, update):
     user = update.message.from_user
     logger.info("Bio of %s: %s", user.first_name, update.message.text)
-    update.message.reply_text('Thank you! I hope we can talk again some day.')
+    update.message.reply_text('Thank you! TTYL!!')
 
     return ConversationHandler.END
 
@@ -127,7 +127,7 @@ def bio(bot, update):
 def cancel(bot, update):
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    update.message.reply_text('Bye! I hope we can talk again some day.',
+    update.message.reply_text('Bye! TTYL and you suck!',
                               reply_markup=ReplyKeyboardRemove())
 
     return ConversationHandler.END

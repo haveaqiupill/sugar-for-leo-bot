@@ -45,12 +45,15 @@ INFOSTORE = {}
 def start(bot, update):
     reply_keyboard = [['I consent']]
     user = update.message.from_user
+    chatid = update.message.chat.id
 
     mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n"
+    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n\n"
+    bot.send_message(text=mainmenutext,
+                     parse_mode=ParseMode.HTML,
+                     chat_id=chatid)
 
     update.message.reply_text(
-        mainmenutext + '\n' +
         'Firstly, please gimme consent for data collection thankiew\n\n' 
         'I consent to providing my personal data for the purpose of Leo House Events. '
         'I would also agree to receive important updates pertaining to matters contained in this survey. '

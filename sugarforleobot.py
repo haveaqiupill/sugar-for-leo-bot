@@ -38,7 +38,7 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
-CONSENT, AFTER_CONSENT, FORWARD_MESSAGE = range(3)
+CONSENT, AFTER_CONSENT, FORWARD_MESSAGE, CONTINUE = range(4)
 
 # set up temporary store of info
 INFOSTORE = {}
@@ -129,13 +129,13 @@ def send_to_baby(bot, update):
     return FORWARD_MESSAGE
 
 def _forward_to_party(bot, update):
-    
-
+    reply_keyboard = [['Continue',"Exit"]]
     user = update.message.from_user
     logger.info("Message of %s: %s", user.first_name, update.message.text)
-    update.message.reply_text('Thank you! I hope we can talk again some day.')
+    update.message.reply_text('Thank you! Your message has been forwarded. What do you want to do next?',
+                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
 
-    return ConversationHandler.END
+    return CONTINUE
 
 
 # for user cancelling
@@ -176,14 +176,15 @@ def main():
         states={
             CONSENT: [RegexHandler('^(I consent)$', consent)],
 
-
-
             AFTER_CONSENT: [CallbackQueryHandler(callback = send_to_parent, pattern = '^(toparent)$'),
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')],
 
             FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party),
-                              CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
+                              CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]
+            CONTINUE: [RegexHandler('^(Continue)$', consent),
+                       RegexHandler('^(Exit)$', cancel) ]
+        },
 
         fallbacks=[CommandHandler('cancel', cancel)],
         allow_reentry=True

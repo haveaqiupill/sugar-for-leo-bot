@@ -37,7 +37,7 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
-CONSENT, PHOTO, LOCATION, BIO = range(4)
+CONSENT, AFTER_CONSENT, FORWARD_MESSAGE = range(3)
 
 # set up temporary store of info
 INFOSTORE = {}
@@ -81,70 +81,87 @@ def consent(bot, update):
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
     user = update.message.from_user
 
-    msgsent = bot.send_message(text='What do you want to do?',
+    msgsent = bot.send_message(text='Now, what do you want to do?',
                                chat_id=chatid,
                                reply_markup=InlineKeyboardMarkup(menu),
                                parse_mode=ParseMode.HTML)
-    
+
     INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
 
-    return PHOTO
+    return AFTER_CONSENT
 
 
-def photo(bot, update):
-    user = update.message.from_user
-    photo_file = update.message.photo[-1].get_file()
-    photo_file.download('user_photo.jpg')
-    logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')
-    update.message.reply_text('Naise! Now, send me your location, '
-                              'or send /skip if you don\'t want to.')
+def send_to_parent(bot, update):
+    query = update.callback_query
+    user = query.from_user
+    logger.info("User {} has just chose to talk to the sugar parent".format(user.username if user.username else user.first_name))
 
-    return LOCATION
+    button_list = [InlineKeyboardButton(text='Done', callback_data='forward'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
+    sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
 
-def skip_photo(bot, update):
-    user = update.message.from_user
-    logger.info("User %s did not send a photo.", user.first_name)
-    update.message.reply_text('Looks like someone is having a bad hair day or is the lighting too dark for you to be seen?'
-                              'Nevermind, send me your location please :), '
-                              'or send /skip.')
+    bot.editMessageText(text=sendtext,
+                        chat_id=query.message.chat_id,
+                        message_id=query.message.message_id,
+                        reply_markup=InlineKeyboardMarkup(menu),
+                        parse_mode=ParseMode.HTML)
 
-    return LOCATION
+    return FORWARD_MESSAGE
 
+def send_to_baby(bot, update):
+    query = update.callback_query
+    user = query.from_user
+    logger.info("User {} has just chose to talk to the sugar baby".format(user.username if user.username else user.first_name))
 
-def location(bot, update):
-    user = update.message.from_user
-    user_location = update.message.location
-    logger.info("Location of %s: %f / %f", user.first_name, user_location.latitude,
-                user_location.longitude)
-    update.message.reply_text('Maybe I can visit your room sometime! '
-                              'Last but not least, tell me something interesting about yourself.')
+    button_list = [InlineKeyboardButton(text='Done', callback_data='forward'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
-    return BIO
+    sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
+    bot.editMessageText(text=sendtext,
+                        chat_id=query.message.chat_id,
+                        message_id=query.message.message_id,
+                        reply_markup=InlineKeyboardMarkup(menu),
+                        parse_mode=ParseMode.HTML)
 
-def skip_location(bot, update):
-    user = update.message.from_user
-    logger.info("User %s did not send a location.", user.first_name)
-    update.message.reply_text('You seem a bit paranoid! But that was a wise choice.\n'
-                              'Last but not least, tell me something interesting about yourself.')
+    return FORWARD_MESSAGE
 
-    return BIO
+def forward_to_party(bot, update):
+    button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
+                   InlineKeyboardButton(text='exit', callback_data='cancel')]
 
+    menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
 
-def bio(bot, update):
-    user = update.message.from_user
-    logger.info("Bio of %s: %s", user.first_name, update.message.text)
-    update.message.reply_text('Thank you you uninteresting creature! TTYL!!')
+    sendtext = "Message: {}." + message + "\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(
+        datashown)
+
+    msgsent = bot.send_message(text=sendtext,
+                               reply_markup=InlineKeyboardMarkup(menu),
+                               chat_id=chatid,
+                               parse_mode=ParseMode.HTML)
+
+    # appends message sent by bot itself
+    INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
 
     return ConversationHandler.END
 
 
+# for user cancelling
 def cancel(bot, update):
-    user = update.message.from_user
-    logger.info("User %s canceled the conversation.", user.first_name)
-    update.message.reply_text('You suck! But bye.',
-                              reply_markup=ReplyKeyboardRemove())
+    query = update.callback_query
+    user = query.from_user
+    logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
+
+    # deletes message sent previously by bot
+    # bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
+
+    bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
+                     chat_id=query.message.chat_id,
+                     message_id=query.message.message_id,
+                     parse_mode=ParseMode.HTML)
 
     return ConversationHandler.END
 
@@ -170,16 +187,18 @@ def main():
         states={
             CONSENT: [RegexHandler('^(I consent)$', consent)],
 
-            PHOTO: [MessageHandler(Filters.photo, photo),
-                    CommandHandler('skip', skip_photo)],
 
-            LOCATION: [MessageHandler(Filters.location, location),
-                       CommandHandler('skip', skip_location)],
 
-            BIO: [MessageHandler(Filters.text, bio)]
-        },
+            AFTER_CONSENT: [CallbackQueryHandler(callback = send_to_parent, pattern = '^(toparent)$'),
+                                CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
+                                CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')],
 
-        fallbacks=[CommandHandler('cancel', cancel)]
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, forward_to_party),
+                              CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')]},
+
+        fallbacks=[CommandHandler('cancel', cancel)],
+        allow_reentry=True
+
     )
 
     dp.add_handler(conv_handler)

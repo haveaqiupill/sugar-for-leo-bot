@@ -24,6 +24,10 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+# EMOJI UNICODE
+CAKE = u"\U0001F382"
+LION = u"\U0001F981"
+
 # Function to build buttons menu for every occasion
 def build_menu(buttons, n_cols, header_buttons, footer_buttons):
     menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
@@ -39,9 +43,12 @@ CONSENT, PHOTO, LOCATION, BIO = range(4)
 def start(bot, update):
     reply_keyboard = [['I consent']]
 
+    mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
+    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n"
+
     update.message.reply_text(
-        'Hi! I am the Sugar for Leo Bot and I will be collecting some data '
-        'Send /cancel to stop talking to me.\n\n'
+        mainmenutext + '\n' +
+        'Firstly, please gimme consent :(\n' 
         'I consent to providing my personal data for the purpose of Leo House Events. '
         'I would also agree to receive important updates pertaining to matters contained in this survey. '
         'All personal information will be kept confidential and be used only for the purpose of Leo House Events. '

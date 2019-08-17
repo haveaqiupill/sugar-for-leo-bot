@@ -85,6 +85,8 @@ def consent(bot, update):
                                chat_id=chatid,
                                reply_markup=InlineKeyboardMarkup(menu),
                                parse_mode=ParseMode.HTML)
+    
+    INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
 
     return PHOTO
 

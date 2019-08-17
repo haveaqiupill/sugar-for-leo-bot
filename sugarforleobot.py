@@ -36,7 +36,7 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
 GENDER, PHOTO, LOCATION, BIO = range(4)
 
 
-def start(update, context):
+def start(bot, update):
     reply_keyboard = [['Boy', 'Girl', 'Other']]
 
     update.message.reply_text(
@@ -48,7 +48,7 @@ def start(update, context):
     return GENDER
 
 
-def gender(update, context):
+def gender(bot, update):
     user = update.message.from_user
     logger.info("Gender of %s: %s", user.first_name, update.message.text)
     update.message.reply_text('I see! Please send me a photo of yourself, '
@@ -58,7 +58,7 @@ def gender(update, context):
     return PHOTO
 
 
-def photo(update, context):
+def photo(bot, update):
     user = update.message.from_user
     photo_file = update.message.photo[-1].get_file()
     photo_file.download('user_photo.jpg')
@@ -69,7 +69,7 @@ def photo(update, context):
     return LOCATION
 
 
-def skip_photo(update, context):
+def skip_photo(bot, update):
     user = update.message.from_user
     logger.info("User %s did not send a photo.", user.first_name)
     update.message.reply_text('I bet you look great! Now, send me your location please, '
@@ -78,7 +78,7 @@ def skip_photo(update, context):
     return LOCATION
 
 
-def location(update, context):
+def location(bot, update):
     user = update.message.from_user
     user_location = update.message.location
     logger.info("Location of %s: %f / %f", user.first_name, user_location.latitude,
@@ -89,7 +89,7 @@ def location(update, context):
     return BIO
 
 
-def skip_location(update, context):
+def skip_location(bot, update):
     user = update.message.from_user
     logger.info("User %s did not send a location.", user.first_name)
     update.message.reply_text('You seem a bit paranoid! '
@@ -98,7 +98,7 @@ def skip_location(update, context):
     return BIO
 
 
-def bio(update, context):
+def bio(bot, update):
     user = update.message.from_user
     logger.info("Bio of %s: %s", user.first_name, update.message.text)
     update.message.reply_text('Thank you! I hope we can talk again some day.')
@@ -106,7 +106,7 @@ def bio(update, context):
     return ConversationHandler.END
 
 
-def cancel(update, context):
+def cancel(bot, update):
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
     update.message.reply_text('Bye! I hope we can talk again some day.',
@@ -115,7 +115,7 @@ def cancel(update, context):
     return ConversationHandler.END
 
 
-def error(update, context):
+def error(bot, update):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 

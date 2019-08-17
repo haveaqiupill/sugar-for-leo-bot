@@ -79,8 +79,9 @@ def consent(bot, update):
 def photo(bot, update):
     user = update.message.from_user
     photo_file = update.message.photo[-1].get_file()
-    photo_file.download('user_photo.jpg')
-    logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')
+    name_of_file = ('%s.jpg',user.first_name)
+    photo_file.download(name_of_file)
+    logger.info("Photo of %s: %s", user.first_name, name_of_file)
     update.message.reply_text('Naise! Now, send me your location, '
                               'or send /skip if you don\'t want to.')
 

@@ -68,10 +68,23 @@ def start(bot, update):
 
 def consent(bot, update):
     user = update.message.from_user
+    chatid = update.message.chat.id
+
+    button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
+                   InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    update.message.reply_text(
+        'Thank you for your consent! ',
+        reply_markup=ReplyKeyboardRemove())
     logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
-    update.message.reply_text('Thank you for your consent! To get Sugar for Leo started, please send me a photo of yourself, '
-                              'so that your sugar parent knows what you look like, or send /skip if you don\'t want to.',
-                              reply_markup=ReplyKeyboardRemove())
+
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+    user = update.message.from_user
+
+    msgsent = bot.send_message(text='What do you want to do?',
+                               chat_id=chatid,
+                               reply_markup=InlineKeyboardMarkup(menu),
+                               parse_mode=ParseMode.HTML)
 
     return PHOTO
 

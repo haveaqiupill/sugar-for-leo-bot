@@ -33,5 +33,26 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
-bot = telegram.Bot(token=TELEGRAM_TOKEN)
-print(bot.get_me())
+def start(update, context):
+    context.bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
+
+def main():
+    updater = Updater(TELEGRAM_TOKEN)
+
+    # dispatcher to register handlers
+    dispatcher = updater.dispatcher
+    start_handler = CommandHandler('start', start)
+    dispatcher.add_handler(start_handler)
+
+    # logs all errors
+    dispatcher.add_error_handler(error)
+
+    updater.start_polling()
+    updater.idle()
+
+def error(bot, update, error):
+    """Log Errors caused by Updates."""
+    logger.warning('Update "%s" caused error "%s"', update, error)
+
+if __name__ == '__main__':
+    main()

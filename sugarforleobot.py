@@ -69,8 +69,8 @@ def start(bot, update):
 def consent(bot, update):
     user = update.message.from_user
     logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
-    update.message.reply_text('Thank you for your consent! Please send me a photo of yourself, '
-                              'so I know what you look like, or send /skip if you don\'t want to.',
+    update.message.reply_text('Thank you for your consent! To get Sugar for Leo started, please send me a photo of yourself, '
+                              'so that your sugar parent knows what you look like, or send /skip if you don\'t want to.',
                               reply_markup=ReplyKeyboardRemove())
 
     return PHOTO
@@ -81,7 +81,7 @@ def photo(bot, update):
     photo_file = update.message.photo[-1].get_file()
     photo_file.download('user_photo.jpg')
     logger.info("Photo of %s: %s", user.first_name, 'user_photo.jpg')
-    update.message.reply_text('Gorgeous! Now, send me your location please, '
+    update.message.reply_text('Naise! Now, send me your location, '
                               'or send /skip if you don\'t want to.')
 
     return LOCATION
@@ -90,7 +90,8 @@ def photo(bot, update):
 def skip_photo(bot, update):
     user = update.message.from_user
     logger.info("User %s did not send a photo.", user.first_name)
-    update.message.reply_text('I bet you look great! Now, send me your location please, '
+    update.message.reply_text('Looks like someone is having a bad hair day or is the lighting too dark for you to be seen?'
+                              'Nevermind, send me your location please :), '
                               'or send /skip.')
 
     return LOCATION
@@ -102,7 +103,7 @@ def location(bot, update):
     logger.info("Location of %s: %f / %f", user.first_name, user_location.latitude,
                 user_location.longitude)
     update.message.reply_text('Maybe I can visit your room sometime! '
-                              'At last, tell me something interesting about yourself.')
+                              'Last but not least, tell me something interesting about yourself.')
 
     return BIO
 
@@ -110,8 +111,8 @@ def location(bot, update):
 def skip_location(bot, update):
     user = update.message.from_user
     logger.info("User %s did not send a location.", user.first_name)
-    update.message.reply_text('You seem a bit paranoid! '
-                              'At last, tell me something interesting about yourself.')
+    update.message.reply_text('You seem a bit paranoid! But that was a wise choice'
+                              'Last but not least, tell me something interesting about yourself.')
 
     return BIO
 
@@ -119,7 +120,7 @@ def skip_location(bot, update):
 def bio(bot, update):
     user = update.message.from_user
     logger.info("Bio of %s: %s", user.first_name, update.message.text)
-    update.message.reply_text('Thank you! TTYL!!')
+    update.message.reply_text('Thank you you uninteresting creature! TTYL!!')
 
     return ConversationHandler.END
 
@@ -127,7 +128,7 @@ def bio(bot, update):
 def cancel(bot, update):
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    update.message.reply_text('Bye! TTYL and you suck!',
+    update.message.reply_text('You suck! But bye.',
                               reply_markup=ReplyKeyboardRemove())
 
     return ConversationHandler.END

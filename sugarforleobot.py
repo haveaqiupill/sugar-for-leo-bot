@@ -118,29 +118,22 @@ def send_to_baby(bot, update):
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
-    update.message.reply_text(text=sendtext,
-                        reply_markup=ReplyKeyboardMarkup(menu, one_time_keyboard=True))
+    bot.editMessageText(text=sendtext,
+                        chat_id=query.message.chat_id,
+                        message_id=query.message.message_id,
+                        reply_markup=InlineKeyboardMarkup(menu),
+                        parse_mode=ParseMode.HTML)
 
 
 
     return FORWARD_MESSAGE
 
 def _forward_to_party(bot, update):
-    message = update.message.from_user
-    INFOSTORE[user.id]["BotMessageID"] = message
+    
 
-    button_list = [InlineKeyboardButton(text='continue', callback_data='_continue'),
-                   InlineKeyboardButton(text='exit', callback_data='cancel')]
-
-    menu = build_menu(button_list, n_cols=2, header_buttons=None, footer_buttons=None)
-    sendtext = "Message: {}." + message + "\n\n<b>The above message has been forwarded. </b>\n What do you wanna do next?".format(
-        datashown)
-
-    msgsent = update.message.reply_text(text=sendtext,
-                               reply_markup=ReplyKeyboardMarkup(menu, one_time_keyboard=True))
-
-    # appends message sent by bot itself
-    INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
+    user = update.message.from_user
+    logger.info("Message of %s: %s", user.first_name, update.message.text)
+    update.message.reply_text('Thank you! I hope we can talk again some day.')
 
     return ConversationHandler.END
 

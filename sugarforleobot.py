@@ -42,7 +42,8 @@ CONSENT, PHOTO, LOCATION, BIO = range(4)
 
 def start(bot, update):
     reply_keyboard = [['I consent']]
-
+    user = update.message.from_user
+    
     mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
     mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n"
 

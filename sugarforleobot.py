@@ -14,7 +14,7 @@ sfl_channel_id = '@SugarForLeoBot'
 admin_user_ids = [508423467, 384865431]  # jingying, keryin
 
 # Using the admin id would allow you to send messages to everyone
-ADMIN_ID = os.environ["ADMIN_PASSWORD"]
+#ADMIN_ID = os.environ["ADMIN_PASSWORD"]
 
 # Set up logging
 logging.basicConfig(

@@ -129,18 +129,11 @@ def send_to_baby(bot, update):
     return FORWARD_MESSAGE
 
 def _forward_to_party(bot, update):
-    query = update.callback_query
-    reply_keyboard = [['Continue', "Exit"]]
+    reply_keyboard = [['Continue',"Exit"]]
     user = update.message.from_user
     logger.info("Message of %s: %s", user.first_name, update.message.text)
-
-    bot.editMessageText(text='Thank you! Your message has been forwarded. ',
-                        chat_id=query.message.chat_id,
-                        message_id=query.message.message_id,
-                        reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True),
-                        parse_mode=ParseMode.HTML)
-
-    update.message.reply_text('What do you want to do next?')
+    update.message.reply_text('Thank you! Your message has been forwarded. What do you want to do next?',
+                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
 
     return CONTINUE
 

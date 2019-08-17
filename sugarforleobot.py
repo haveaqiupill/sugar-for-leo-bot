@@ -111,7 +111,7 @@ def location(bot, update):
 def skip_location(bot, update):
     user = update.message.from_user
     logger.info("User %s did not send a location.", user.first_name)
-    update.message.reply_text('You seem a bit paranoid! But that was a wise choice'
+    update.message.reply_text('You seem a bit paranoid! But that was a wise choice.\n'
                               'Last but not least, tell me something interesting about yourself.')
 
     return BIO

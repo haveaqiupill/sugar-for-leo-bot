@@ -33,25 +33,30 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
-GENDER, PHOTO, LOCATION, BIO = range(4)
+CONSENT, PHOTO, LOCATION, BIO = range(4)
 
 
 def start(bot, update):
-    reply_keyboard = [['Boy', 'Girl', 'Other']]
+    reply_keyboard = [['I consent']]
 
     update.message.reply_text(
-        'Hi! My name is Professor Bot. I will hold a conversation with you. '
+        'Hi! I am the Sugar for Leo Bot and I will be collecting some data '
         'Send /cancel to stop talking to me.\n\n'
-        'Are you a boy or a girl?',
+        'I consent to providing my personal data for the purpose of Leo House Events. '
+        'I would also agree to receive important updates pertaining to matters contained in this survey. '
+        'All personal information will be kept confidential and be used only for the purpose of Leo House Events. '
+        'I understand that should I wish to withdraw my consent for the organising committee to contact me for the purposes stated above, '
+        'I could notify Qiu Jing Ying, Residential College 4, Leo House Committee Secretary, in writing to e0323887@u.nus.edu. '
+        'The organising committee will then remove my personal information from their database, and I allow 7 business days for my withdrawal of consent to take effect.',
         reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
 
-    return GENDER
+    return CONSENT
 
 
-def gender(bot, update):
+def consent(bot, update):
     user = update.message.from_user
-    logger.info("Gender of %s: %s", user.first_name, update.message.text)
-    update.message.reply_text('I see! Please send me a photo of yourself, '
+    logger.info("User %s: %s", user.first_name, update.message.text)
+    update.message.reply_text('Thank you for your consent! Please send me a photo of yourself, '
                               'so I know what you look like, or send /skip if you don\'t want to.',
                               reply_markup=ReplyKeyboardRemove())
 
@@ -129,12 +134,12 @@ def main():
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
-    # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
+    # Add conversation handler with the states CONSENT, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
 
         states={
-            GENDER: [RegexHandler('^(Boy|Girl|Other)$', gender)],
+            CONSENT: [RegexHandler('^(I consent)$', consent)],
 
             PHOTO: [MessageHandler(Filters.photo, photo),
                     CommandHandler('skip', skip_photo)],

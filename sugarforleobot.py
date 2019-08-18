@@ -172,11 +172,11 @@ def _forward_from_baby(bot, update):
     sendtext = INFOSTORE[user.id] + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
-    messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
+    messagefrombaby = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
     messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
-        text=messagefromparent,
+        text=messagefrombaby,
         chat_id=JINGYING,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)

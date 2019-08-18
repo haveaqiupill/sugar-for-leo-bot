@@ -125,27 +125,23 @@ def send_to_baby(bot, update):
                         message_id=query.message.message_id,
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
-    
+    INFOSTORE[user.id] = update.message.text
     return FORWARD_MESSAGE
 
 
 def _forward_to_party(bot, update):
-    message = update.message
-    user = message.from_user
-    logger.info("Message of %s: %s", user.first_name, message.text)
+    query = update.callback_query
+    user = query.from_user
+    logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     button_list = [InlineKeyboardButton(text='Send Another', callback_data='continue'),
                    InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
-    sendtext = 'Thank you! Your message has been forwarded. What do you want to do next?'
-    bot.editMessageText(text=sendtext,
-                        chat_id=message.chat_id,
-                        message_id=message.message_id,
-                        reply_markup=InlineKeyboardMarkup(menu),
-                        parse_mode=ParseMode.HTML)
+    sendtext = INFOSTORE[user.id] + "\n\n"
+    sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
-    return CONTINUE
+    return ConversationHandler.END
 
 def _continue(bot, update):
     query = update.callback_query

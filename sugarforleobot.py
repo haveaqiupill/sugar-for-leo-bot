@@ -136,7 +136,7 @@ def _forward_from_parent(bot, update):
 
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
-    sendtext = LION + INFOSTORE[user.id] + LION + "\n\n"
+    sendtext = INFOSTORE[user.id] +  "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
@@ -158,7 +158,7 @@ def _forward_from_baby(bot, update):
 
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
-    sendtext = LION + INFOSTORE[user.id] + LION + "\n\n"
+    sendtext = INFOSTORE[user.id] + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]

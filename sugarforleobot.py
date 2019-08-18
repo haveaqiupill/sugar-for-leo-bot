@@ -142,7 +142,7 @@ def _forward_from_parent(bot, update):
     messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
     bot.send_message(
         text=messagefromparent,
-        chat_id=SHAHEEL,
+        chat_id=JINGYING,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -164,7 +164,7 @@ def _forward_from_baby(bot, update):
     messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
     bot.send_message(
         text=messagefromparent,
-        chat_id=SHAHEEL,
+        chat_id=JINGYING,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

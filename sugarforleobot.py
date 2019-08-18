@@ -158,7 +158,7 @@ def _forward_from_baby(bot, update):
 
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
-    sendtext = INFOSTORE[user.id] + "\n\n"
+    sendtext = "\"" + INFOSTORE[user.id] + "\"\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]

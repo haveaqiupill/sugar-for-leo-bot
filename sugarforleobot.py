@@ -30,7 +30,7 @@ LION = u"\U0001F981"
 SMILEY = u"\U0001F642"
 
 #CHAT IDS
-SHAHEEL = 508423467
+SHAHEEL = 99260110
 
 # Function to build buttons menu for every occasion
 def build_menu(buttons, n_cols, header_buttons, footer_buttons):

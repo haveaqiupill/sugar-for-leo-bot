@@ -147,7 +147,7 @@ def _forward_from_parent(bot, update):
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=SHAHEEL,
+        chat_id=PRISCILIA,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

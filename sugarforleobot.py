@@ -33,6 +33,9 @@ SMILEY = u"\U0001F642"
 JINGYING = 508423467
 KERYIN = 384865431
 SHAHEEL = 99260110
+PRISCILIA = 181854022
+
+
 
 # Function to build buttons menu for every occasion
 def build_menu(buttons, n_cols, header_buttons, footer_buttons):
@@ -144,7 +147,7 @@ def _forward_from_parent(bot, update):
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=JINGYING,
+        chat_id=SHAHEEL,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -170,11 +173,11 @@ def _forward_from_baby(bot, update):
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
-    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar baby: \n\n" + INFOSTORE[user.id]
+    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=JINGYING,
+        chat_id=SHAHEEL,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

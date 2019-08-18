@@ -114,11 +114,20 @@ def send_to_baby(bot, update):
     user = query.from_user
     logger.info("User {} has just chose to talk to the sugar baby".format(user.username if user.username else user.first_name))
 
+    button_list = [InlineKeyboardButton(text='Send', callback_data='send'),
+        InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
-    user.message.reply_text(sendtext, reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
-
-    return FORWARD_MESSAGE
+    bot.editMessageText(text=sendtext,
+                        chat_id=query.message.chat_id,
+                        message_id=query.message.message_id,
+                        reply_markup=InlineKeyboardMarkup(menu),
+                        parse_mode=ParseMode.HTML)
+    if update.message:
+        return FORWARD_MESSAGE
+    
 
 def _forward_to_party(bot, update):
     message = update.message

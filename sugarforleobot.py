@@ -115,7 +115,7 @@ def send_to_parent(bot, update):
 
     INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
 
-    return FORWARD_PARENT
+    return FORWARD_BABY
 
 def send_to_baby(bot, update):
     query = update.callback_query
@@ -127,7 +127,7 @@ def send_to_baby(bot, update):
 
     INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
 
-    return FORWARD_BABY
+    return FORWARD_PARENT
 
 
 def _forward_from_parent(bot, update):
@@ -142,12 +142,12 @@ def _forward_from_parent(bot, update):
     sendtext = INFOSTORE[user.id] +  "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
-    messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
-    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
+    messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
+    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar baby: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=PRISCILIA,
+        chat_id=JINGYING,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -172,12 +172,12 @@ def _forward_from_baby(bot, update):
     sendtext = INFOSTORE[user.id] + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
-    messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
-    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar baby: \n\n" + INFOSTORE[user.id]
+    messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
+    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=SHAHEEL,
+        chat_id=JINGYING,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

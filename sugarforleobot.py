@@ -103,7 +103,7 @@ def send_to_parent(bot, update):
     logger.info("User {} has just chose to talk to the sugar parent".format(user.username if user.username else user.first_name))
 
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
-    bot.sendMessage(sendtext)
+    bot.send_message(chat_id=user.id, text=sendtext)
 
     return FORWARD_MESSAGE
 
@@ -113,7 +113,7 @@ def send_to_baby(bot, update):
     logger.info("User {} has just chose to talk to the sugar baby".format(user.username if user.username else user.first_name))
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
-    bot.sendMessage(sendtext)
+    bot.send_message(chat_id=user.id, text=sendtext)
 
     return FORWARD_MESSAGE
 
@@ -128,6 +128,7 @@ def _forward_to_party(bot, update):
     sendtext = INFOSTORE[user.id] + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
+    update.message.reply_text(sendtext)
     return ConversationHandler.END
 
 def _continue(bot, update):

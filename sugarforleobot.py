@@ -129,9 +129,10 @@ def send_to_baby(bot, update):
     return FORWARD_MESSAGE
 
 def _forward_to_party(bot, update):
-    query = update.callback_query
+    tempupdate = update
+    query = tempupdate.callback_query
     user = query.from_user
-    logger.info("Message of %s: %s", user.first_name, update.message.text)
+    logger.info("Message of %s: %s", user.first_name, tempupdate.message.text)
 
     button_list = [InlineKeyboardButton(text='Send Another', callback_data='continue'),
                    InlineKeyboardButton(text='Cancel', callback_data='cancel')]
@@ -139,16 +140,16 @@ def _forward_to_party(bot, update):
 
     sendtext = 'Thank you! Your message has been forwarded. What do you want to do next?'
     bot.editMessageText(text=sendtext,
-                        chat_id=update.message.chat_id,
-                        message_id=update.message.message_id,
+                        chat_id=tempupdate.message.chat_id,
+                        message_id=tempupdate.message.message_id,
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
     return CONTINUE
 
 def _continue(bot, update):
-    query = update.inline_query
-    user = query.message.from_user
+    query = update.callback_query
+    user = query.from_user
 
     button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
                    InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),

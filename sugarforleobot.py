@@ -43,7 +43,7 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
-CONSENT, AFTER_CONSENT, FORWARD_MESSAGE, CONTINUE = range(4)
+CONSENT, AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY, CONTINUE = range(5)
 
 # set up temporary store of info
 INFOSTORE = {}

@@ -43,7 +43,7 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
-CONSENT, AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY, CONTINUE = range(5)
+CONSENT, AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(4)
 
 # set up temporary store of info
 INFOSTORE = {}
@@ -215,10 +215,7 @@ def main():
 
             FORWARD_PARENT: [MessageHandler(Filters.text, _forward_from_parent)],
 
-            FORWARD_BABY: [MessageHandler(Filters.text, _forward_from_baby)],
-
-            CONTINUE: [CallbackQueryHandler(callback = _continue, pattern = '^(continue)$'),
-                                CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')]
+            FORWARD_BABY: [MessageHandler(Filters.text, _forward_from_baby)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel)],

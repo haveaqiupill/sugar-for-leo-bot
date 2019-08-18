@@ -29,6 +29,9 @@ CAKE = u"\U0001F382"
 LION = u"\U0001F981"
 SMILEY = u"\U0001F642"
 
+#CHAT IDS
+SHAHEEL = 508423467
+
 # Function to build buttons menu for every occasion
 def build_menu(buttons, n_cols, header_buttons, footer_buttons):
     menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
@@ -103,7 +106,9 @@ def send_to_parent(bot, update):
     logger.info("User {} has just chose to talk to the sugar parent".format(user.username if user.username else user.first_name))
 
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
-    bot.send_message(chat_id=user.id, text=sendtext)
+    bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
+
+    INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
 
     return FORWARD_MESSAGE
 
@@ -113,7 +118,9 @@ def send_to_baby(bot, update):
     logger.info("User {} has just chose to talk to the sugar baby".format(user.username if user.username else user.first_name))
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
-    bot.send_message(chat_id=user.id, text=sendtext)
+    bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
+
+    INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
 
     return FORWARD_MESSAGE
 
@@ -123,10 +130,15 @@ def _forward_to_party(bot, update):
     chatid = update.message.chat.id
     INFOSTORE[user.id] = update.message.text
 
+    bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
+
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     sendtext = INFOSTORE[user.id] + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
+
+    messagefromparent = 'Hello! Your sugar parent wants to say:\n\n' + INFOSTORE[user.id]
+    bot.send_message(chat_id=SHAHEEL, text=messagefromparent)
 
     update.message.reply_text(sendtext)
     return ConversationHandler.END

@@ -95,7 +95,8 @@ def send_to_parent(bot, update):
     user = query.from_user
     logger.info("User {} has just chose to talk to the sugar parent".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    button_list = [InlineKeyboardButton(text='Send', callback_data='send'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
@@ -128,16 +129,19 @@ def send_to_baby(bot, update):
     return FORWARD_MESSAGE
 
 def _forward_to_party(bot, update):
-    reply_keyboard = [['Continue',"Exit"]]
     query = update.callback_query
     user = query.from_user
     logger.info("Message of %s: %s", user.first_name, update.message.text)
+
+    button_list = [InlineKeyboardButton(text='Send Another', callback_data='continue'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     sendtext = 'Thank you! Your message has been forwarded. What do you want to do next?'
     bot.editMessageText(text=sendtext,
                         chat_id=update.message.chat_id,
                         message_id=update.message.message_id,
-                        reply_markup=InlineKeyboardMarkup(reply_keyboard),
+                        reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
     return CONTINUE
@@ -154,7 +158,7 @@ def _continue(bot, update):
 
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
-    bot.send_message(text='What do you want to do?',
+    bot.send_message(text='Who do you want to talk to?',
                      chat_id=update.message.chat_id,
                      reply_markup=InlineKeyboardMarkup(menu),
                      parse_mode=ParseMode.HTML)
@@ -207,8 +211,8 @@ def main():
             FORWARD_MESSAGE: [CallbackQueryHandler(callback=_forward_to_party, pattern='^(send)$'),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
-            CONTINUE: [RegexHandler('^(Continue)$', _continue),
-                       RegexHandler('^(Exit)$', cancel)]
+            CONTINUE: [CallbackQueryHandler(callback = _continue, pattern = '^(continue)$'),
+                                CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')]
         },
 
         fallbacks=[CommandHandler('cancel', cancel)],

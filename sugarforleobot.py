@@ -140,9 +140,17 @@ def _forward_from_parent(bot, update):
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
+    messagetoadmin = "User " + user.first_name + " of user id " + user.id + "sent this to the sugar baby: " + messagefromparent
+
     bot.send_message(
         text=messagefromparent,
         chat_id=JINGYING,
+        message_id=update.message.message_id,
+        parse_mode=ParseMode.HTML)
+
+    bot.send_message(
+        text=messagetoadmin,
+        chat_id=admin_group_id,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -162,9 +170,17 @@ def _forward_from_baby(bot, update):
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
+    messagetoadmin = "User " + user.first_name + " of user id " + user.id + "sent this to the sugar baby: " + messagefromparent
+
     bot.send_message(
         text=messagefromparent,
         chat_id=JINGYING,
+        message_id=update.message.message_id,
+        parse_mode=ParseMode.HTML)
+
+    bot.send_message(
+        text=messagetoadmin,
+        chat_id=admin_group_id,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

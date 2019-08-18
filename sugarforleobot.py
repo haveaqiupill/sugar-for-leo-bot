@@ -113,7 +113,8 @@ def send_to_baby(bot, update):
     user = query.from_user
     logger.info("User {} has just chose to talk to the sugar baby".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    button_list = [InlineKeyboardButton(text='Send', callback_data='send'),
+        InlineKeyboardButton(text='Cancel', callback_data='cancel')]
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
@@ -141,6 +142,25 @@ def _forward_to_party(bot, update):
                         parse_mode=ParseMode.HTML)
 
     return CONTINUE
+
+def _continue(bot, update):
+    user = update.message.from_user
+    chatid = update.message.chat.id
+
+    button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
+                   InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
+                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+
+    logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
+
+    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+
+    bot.send_message(text='What do you want to do?',
+                     chat_id=chatid,
+                     reply_markup=InlineKeyboardMarkup(menu),
+                     parse_mode=ParseMode.HTML)
+
+    return AFTER_CONSENT
 
 
 # for user cancelling
@@ -184,9 +204,10 @@ def main():
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party),
+            FORWARD_MESSAGE: [CallbackQueryHandler(callback=_forward_to_party, pattern='^(send)$'),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
-            CONTINUE: [RegexHandler('^(Continue)$', consent),
+
+            CONTINUE: [RegexHandler('^(Continue)$', _continue),
                        RegexHandler('^(Exit)$', cancel)]
         },
 

@@ -132,8 +132,13 @@ def _forward_to_party(bot, update):
     reply_keyboard = [['Continue',"Exit"]]
     user = update.message.from_user
     logger.info("Message of %s: %s", user.first_name, update.message.text)
-    update.message.reply_text('Thank you! Your message has been forwarded. What do you want to do next?',
-                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+
+    sendtext = 'Thank you! Your message has been forwarded. What do you want to do next?'
+    bot.editMessageText(text=sendtext,
+                        chat_id=update.message.chat_id,
+                        message_id=update.message.message_id,
+                        reply_markup=InlineKeyboardMarkup(reply_keyboard),
+                        parse_mode=ParseMode.HTML)
 
     return CONTINUE
 

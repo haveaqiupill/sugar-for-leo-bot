@@ -82,10 +82,17 @@ def consent(bot, update):
 
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
-    bot.send_message(text='Now, what do you want to do?',
-                     chat_id=chatid,
-                     reply_markup=InlineKeyboardMarkup(menu),
-                     parse_mode=ParseMode.HTML)
+    # set up INFOSTORE
+    INFOSTORE[user.id] = {}
+    INFOSTORE[user.id]["BotMessageID"] = []
+
+    msgsent = bot.send_message(text='Now, what do you want to do?',
+                               chat_id=chatid,
+                               reply_markup=InlineKeyboardMarkup(menu),
+                               parse_mode=ParseMode.HTML)
+
+    # appends message sent by bot itself - the very first message: start message
+    INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
 
     return AFTER_CONSENT
 
@@ -101,11 +108,9 @@ def send_to_parent(bot, update):
 
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
 
-    bot.editMessageText(text=sendtext,
-                        chat_id=query.message.chat_id,
-                        message_id=query.message.message_id,
-                        reply_markup=InlineKeyboardMarkup(menu),
-                        parse_mode=ParseMode.HTML)
+    bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
+
+
 
     return FORWARD_MESSAGE
 
@@ -130,13 +135,9 @@ def send_to_baby(bot, update):
 
 
 def _forward_to_party(bot, update):
-    query = update.callback_query
-    user = query.from_user
+    user = update.message.from_user
+    chatid = update.message.chat.id
     logger.info("Message of %s: %s", user.first_name, update.message.text)
-
-    button_list = [InlineKeyboardButton(text='Send Another', callback_data='continue'),
-                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
-    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     sendtext = INFOSTORE[user.id] + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
@@ -203,11 +204,10 @@ def main():
 
             AFTER_CONSENT: [CallbackQueryHandler(callback = send_to_parent, pattern = '^(toparent)$'),
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
-                                CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')],
+                                CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$'),
+                            MessageHandler(Filters.text, _forward_to_party)],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party),
-                            CallbackQueryHandler(callback=_forward_to_party, pattern='^(send)$'),
-                              CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party)],
 
             CONTINUE: [CallbackQueryHandler(callback = _continue, pattern = '^(continue)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')]

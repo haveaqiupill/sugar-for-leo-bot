@@ -125,13 +125,12 @@ def send_to_baby(bot, update):
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
 
-
-
     return FORWARD_MESSAGE
 
 def _forward_to_party(bot, update):
     reply_keyboard = [['Continue',"Exit"]]
-    user = update.message.from_user
+    query = update.callback_query
+    user = query.from_user
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     sendtext = 'Thank you! Your message has been forwarded. What do you want to do next?'
@@ -165,7 +164,8 @@ def _continue(bot, update):
 
 # for user cancelling
 def cancel(bot, update):
-    user = update.message.from_user
+    query = update.callback_query
+    user = query.from_user
     logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
 
     # deletes message sent previously by bot

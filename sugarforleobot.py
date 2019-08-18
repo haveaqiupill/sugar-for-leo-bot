@@ -140,7 +140,7 @@ def _forward_from_parent(bot, update):
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
-    messagetoadmin = "User " + user.first_name + " of user id " + "user.id" + "sent this to the sugar baby: " + messagefromparent
+    messagetoadmin = "User " + user.first_name + " of user id " + "user.id" + " sent this to the sugar baby: " + INFOSTORE[user.id]
 
     bot.send_message(
         text=messagefromparent,
@@ -170,7 +170,7 @@ def _forward_from_baby(bot, update):
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
     messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
-    messagetoadmin = "User " + user.first_name + " of user id " + "user.id" + "sent this to the sugar baby: " + messagefromparent
+    messagetoadmin = "User " + user.first_name + " of user id " + "user.id" + " sent this to the sugar baby: " + INFOSTORE[user.id]
 
     bot.send_message(
         text=messagefromparent,

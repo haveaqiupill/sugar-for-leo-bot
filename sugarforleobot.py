@@ -116,7 +116,7 @@ def send_to_baby(bot, update):
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
-    update.message.reply_text(sendtext, reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+    user.message.reply_text(sendtext, reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
 
     return FORWARD_MESSAGE
 

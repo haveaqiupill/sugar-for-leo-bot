@@ -105,8 +105,6 @@ def send_to_parent(bot, update):
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
     update.message.reply_text(sendtext)
 
-    INFOSTORE[user.id] = update.message.text
-
     return FORWARD_MESSAGE
 
 def send_to_baby(bot, update):
@@ -116,8 +114,6 @@ def send_to_baby(bot, update):
 
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
     update.message.reply_text(sendtext)
-    
-    INFOSTORE[user.id] = update.message.text
 
     return FORWARD_MESSAGE
 
@@ -125,6 +121,8 @@ def send_to_baby(bot, update):
 def _forward_to_party(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
+    INFOSTORE[user.id] = update.message.text
+    
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     sendtext = INFOSTORE[user.id] + "\n\n"

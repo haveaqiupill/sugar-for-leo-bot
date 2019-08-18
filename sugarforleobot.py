@@ -141,7 +141,7 @@ def _forward_to_party(bot, update):
 # for user cancelling
 def cancel(bot, update):
     query = update.callback_query
-    user = query.from_user
+    user = update.message.from_user
     logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
 
     # deletes message sent previously by bot

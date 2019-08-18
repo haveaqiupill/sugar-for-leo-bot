@@ -125,9 +125,9 @@ def send_to_baby(bot, update):
                         message_id=query.message.message_id,
                         reply_markup=InlineKeyboardMarkup(menu),
                         parse_mode=ParseMode.HTML)
-    if update.message:
-        return FORWARD_MESSAGE
     
+    return FORWARD_MESSAGE
+
 
 def _forward_to_party(bot, update):
     message = update.message
@@ -209,7 +209,8 @@ def main():
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')],
 
-            FORWARD_MESSAGE: [CallbackQueryHandler(callback=_forward_to_party, pattern='^(send)$'),
+            FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party),
+                            CallbackQueryHandler(callback=_forward_to_party, pattern='^(send)$'),
                               CallbackQueryHandler(callback=cancel, pattern='^(cancel)$')],
 
             CONTINUE: [CallbackQueryHandler(callback = _continue, pattern = '^(continue)$'),

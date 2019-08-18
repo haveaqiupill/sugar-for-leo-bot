@@ -143,8 +143,8 @@ def _forward_to_party(bot, update):
     return CONTINUE
 
 def _continue(bot, update):
-    user = update.message.from_user
-    chatid = update.message.chat.id
+    query = update.inline_query
+    user = query.message.from_user
 
     button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
                    InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
@@ -155,7 +155,7 @@ def _continue(bot, update):
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
     bot.send_message(text='What do you want to do?',
-                     chat_id=chatid,
+                     chat_id=update.message.chat_id,
                      reply_markup=InlineKeyboardMarkup(menu),
                      parse_mode=ParseMode.HTML)
 

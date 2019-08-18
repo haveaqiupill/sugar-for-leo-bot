@@ -130,7 +130,7 @@ def _forward_to_party(bot, update):
     chatid = update.message.chat.id
     INFOSTORE[user.id] = update.message.text
 
-    bot.delete_message(chat_id=user.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
+    bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 

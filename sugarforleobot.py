@@ -130,7 +130,7 @@ def _forward_to_party(bot, update):
     chatid = update.message.chat.id
     INFOSTORE[user.id] = update.message.text
 
-    bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
+    bot.delete_message(chat_id=user.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
@@ -168,9 +168,6 @@ def cancel(bot, update):
     query = update.callback_query
     user = query.from_user
     logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
-
-    # deletes message sent previously by bot
-    # bot.delete_message(chat_id=query.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
 
     bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
                      chat_id=update.message.chat_id,

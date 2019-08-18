@@ -102,15 +102,10 @@ def send_to_parent(bot, update):
     user = query.from_user
     logger.info("User {} has just chose to talk to the sugar parent".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Send', callback_data='send'),
-                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
-    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
-
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
+    update.message.reply_text(sendtext)
 
-    bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"][-1])
-
-
+    INFOSTORE[user.id] = update.message.text
 
     return FORWARD_MESSAGE
 
@@ -119,18 +114,11 @@ def send_to_baby(bot, update):
     user = query.from_user
     logger.info("User {} has just chose to talk to the sugar baby".format(user.username if user.username else user.first_name))
 
-    button_list = [InlineKeyboardButton(text='Send', callback_data='send'),
-        InlineKeyboardButton(text='Cancel', callback_data='cancel')]
-    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
-
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
-
-    bot.editMessageText(text=sendtext,
-                        chat_id=query.message.chat_id,
-                        message_id=query.message.message_id,
-                        reply_markup=InlineKeyboardMarkup(menu),
-                        parse_mode=ParseMode.HTML)
+    update.message.reply_text(sendtext)
+    
     INFOSTORE[user.id] = update.message.text
+
     return FORWARD_MESSAGE
 
 

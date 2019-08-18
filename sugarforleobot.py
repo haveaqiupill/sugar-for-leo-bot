@@ -210,7 +210,7 @@ def main():
             AFTER_CONSENT: [CallbackQueryHandler(callback = send_to_parent, pattern = '^(toparent)$'),
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$'),
-                            MessageHandler(Filters.text, _forward_from_party),
+                            MessageHandler(Filters.text, _forward_from_parent),
                             MessageHandler(Filters.text, _forward_from_baby)],
 
             FORWARD_PARENT: [MessageHandler(Filters.text, _forward_from_parent)],

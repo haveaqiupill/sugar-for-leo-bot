@@ -30,6 +30,8 @@ LION = u"\U0001F981"
 SMILEY = u"\U0001F642"
 
 #CHAT IDS
+JINGYING =
+KERYIN =
 SHAHEEL = 99260110
 
 # Function to build buttons menu for every occasion
@@ -110,7 +112,7 @@ def send_to_parent(bot, update):
 
     INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
 
-    return FORWARD_MESSAGE
+    return FORWARD_PARENT
 
 def send_to_baby(bot, update):
     query = update.callback_query
@@ -122,10 +124,10 @@ def send_to_baby(bot, update):
 
     INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
 
-    return FORWARD_MESSAGE
+    return FORWARD_BABY
 
 
-def _forward_to_party(bot, update):
+def _forward_from_parent(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
     INFOSTORE[user.id] = update.message.text
@@ -137,30 +139,37 @@ def _forward_to_party(bot, update):
     sendtext = INFOSTORE[user.id] + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
-    messagefromparent = 'Hello! Your sugar parent wants to say:\n\n' + INFOSTORE[user.id]
-    bot.send_message(chat_id=SHAHEEL, text=messagefromparent)
+    messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
+    bot.send_message(
+        text=messagefromparent,
+        chat_id=SHAHEEL,
+        message_id=update.message.message_id,
+        parse_mode=ParseMode.HTML)
 
     update.message.reply_text(sendtext)
     return ConversationHandler.END
 
-def _continue(bot, update):
-    query = update.callback_query
-    user = query.from_user
+def _forward_from_baby(bot, update):
+    user = update.message.from_user
+    chatid = update.message.chat.id
+    INFOSTORE[user.id] = update.message.text
 
-    button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
-                   InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
-                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+    #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
-    logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
+    logger.info("Message of %s: %s", user.first_name, update.message.text)
 
-    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+    sendtext = INFOSTORE[user.id] + "\n\n"
+    sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
 
-    bot.send_message(text='Who do you want to talk to?',
-                     chat_id=update.message.chat_id,
-                     reply_markup=InlineKeyboardMarkup(menu),
-                     parse_mode=ParseMode.HTML)
+    messagefromparent = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
+    bot.send_message(
+        text=messagefromparent,
+        chat_id=SHAHEEL,
+        message_id=update.message.message_id,
+        parse_mode=ParseMode.HTML)
 
-    return AFTER_CONSENT
+    update.message.reply_text(sendtext)
+    return ConversationHandler.END
 
 
 # for user cancelling
@@ -201,9 +210,12 @@ def main():
             AFTER_CONSENT: [CallbackQueryHandler(callback = send_to_parent, pattern = '^(toparent)$'),
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$'),
-                            MessageHandler(Filters.text, _forward_to_party)],
+                            MessageHandler(Filters.text, _forward_from_party),
+                            MessageHandler(Filters.text, _forward_from_baby)],
 
-            FORWARD_MESSAGE: [MessageHandler(Filters.text, _forward_to_party)],
+            FORWARD_PARENT: [MessageHandler(Filters.text, _forward_from_parent)],
+
+            FORWARD_BABY: [MessageHandler(Filters.text, _forward_from_baby)],
 
             CONTINUE: [CallbackQueryHandler(callback = _continue, pattern = '^(continue)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$')]

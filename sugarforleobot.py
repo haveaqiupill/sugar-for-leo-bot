@@ -30,8 +30,8 @@ LION = u"\U0001F981"
 SMILEY = u"\U0001F642"
 
 #CHAT IDS
-JINGYING =
-KERYIN =
+JINGYING = 508423467
+KERYIN = 384865431
 SHAHEEL = 99260110
 
 # Function to build buttons menu for every occasion

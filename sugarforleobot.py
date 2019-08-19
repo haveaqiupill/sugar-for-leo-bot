@@ -113,7 +113,7 @@ def send_to_parent(bot, update):
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
 
-    INFOSTORE[user.id]["BotMessageID"] = update.message.chat_id
+    #INFOSTORE[user.id]["BotMessageID"] = update.message.chat_id
 
     return FORWARD_BABY
 
@@ -125,7 +125,7 @@ def send_to_baby(bot, update):
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
 
-    INFOSTORE[user.id]["BotMessageID"] = update.message.chat_id
+    #INFOSTORE[user.id]["BotMessageID"] = update.message.chat_id
 
     return FORWARD_PARENT
 
@@ -135,7 +135,7 @@ def _forward_from_parent(bot, update):
     chatid = update.message.chat.id
     INFOSTORE[user.id] = update.message.text
 
-    bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
+    #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
@@ -175,7 +175,7 @@ def _forward_from_baby(bot, update):
     messagefrombaby = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
     messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
 
-    bot.send_message(
+    update.message.reply_text(
         text=messagefrombaby,
         chat_id=JINGYING,
         message_id=update.message.message_id,

@@ -25,7 +25,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # EMOJI UNICODE
-CAKE = u"\U0001F382"
 LION = u"\U0001F981"
 SMILEY = u"\U0001F642"
 

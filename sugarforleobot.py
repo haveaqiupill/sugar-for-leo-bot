@@ -34,7 +34,10 @@ JINGYING = 508423467
 KERYIN = 384865431
 SHAHEEL = 99260110
 PRISCILIA = 181854022
-
+BLAKE = 559780833
+GERALD = 231696047
+AQILAH = 130512569
+BRIAN = 209469386
 
 
 # Function to build buttons menu for every occasion
@@ -46,18 +49,16 @@ def build_menu(buttons, n_cols, header_buttons, footer_buttons):
         menu.append(footer_buttons)
     return menu
 
-CONSENT, AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(4)
+AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(3)
 
 # set up temporary store of info
 INFOSTORE = {}
 
 def start(bot, update):
-    reply_keyboard = [['I consent']]
     user = update.message.from_user
     chatid = update.message.chat.id
 
-    mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n\n"
+
     bot.send_message(text=mainmenutext,
                      parse_mode=ParseMode.HTML,
                      chat_id=chatid)
@@ -72,20 +73,20 @@ def start(bot, update):
         'The organising committee will then remove my personal information from their database, and I allow 7 business days for my withdrawal of consent to take effect.',
         reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
 
-    return CONSENT
+    return AFTER_CONSENT
 
 
-def consent(bot, update):
+def start(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
+
+    mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
+    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + 'What do you want to do?'
 
     button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
                    InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
                    InlineKeyboardButton(text='Cancel', callback_data='cancel')]
 
-    update.message.reply_text(
-        'Thank you for your consent! ',
-        reply_markup=ReplyKeyboardRemove())
     logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
 
     menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
@@ -94,7 +95,7 @@ def consent(bot, update):
     INFOSTORE[user.id] = {}
     INFOSTORE[user.id]["BotMessageID"] = []
 
-    msgsent = bot.send_message(text='Now, what do you want to do?',
+    msgsent = bot.send_message(text=mainmenutext,
                                chat_id=chatid,
                                reply_markup=InlineKeyboardMarkup(menu),
                                parse_mode=ParseMode.HTML)
@@ -224,8 +225,6 @@ def main():
         entry_points=[CommandHandler('start', start)],
 
         states={
-            CONSENT: [RegexHandler('^(I consent)$', consent)],
-
             AFTER_CONSENT: [CallbackQueryHandler(callback = send_to_parent, pattern = '^(toparent)$'),
                                 CallbackQueryHandler(callback = send_to_baby, pattern = '^(tobaby)$'),
                                 CallbackQueryHandler(callback = cancel, pattern = '^(cancel)$'),

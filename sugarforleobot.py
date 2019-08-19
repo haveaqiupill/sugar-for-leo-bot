@@ -114,7 +114,7 @@ def send_to_parent(bot, update):
     sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
 
-    INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
+    INFOSTORE[user.id]["BotMessageID"] = update.message.chat_id
 
     return FORWARD_BABY
 
@@ -126,7 +126,7 @@ def send_to_baby(bot, update):
     sendtext="<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
 
-    INFOSTORE[user.id]["BotMessageID"].append(sendtext['message_id'])
+    INFOSTORE[user.id]["BotMessageID"] = update.message.chat_id
 
     return FORWARD_PARENT
 
@@ -136,7 +136,7 @@ def _forward_from_parent(bot, update):
     chatid = update.message.chat.id
     INFOSTORE[user.id] = update.message.text
 
-    #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
+    bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
@@ -199,7 +199,6 @@ def cancel(bot, update):
     logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
 
     bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
-                     chat_id=update.message.chat_id,
                      message_id=update.message.message_id,
                      parse_mode=ParseMode.HTML)
 

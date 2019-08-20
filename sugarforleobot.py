@@ -60,10 +60,10 @@ class User:
         self.babyid = sugarbabyid
 
     def get_parentid(self):
-        return sugarparentid
+        return self.parentid
 
     def get_babyid(self):
-        return sugarbabyid
+        return self.babyid
 
 #USER OBJECTS
 keryin = User(KERYIN, JINGYING, SHAHEEL)

@@ -79,7 +79,7 @@ def start(bot, update):
     chatid = update.message.chat.id
 
     mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + 'What do you want to do?'
+    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + 'What do you want to do? (Take note: you can only send one text message per time via this bot!)'
 
     button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
                    InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
@@ -135,7 +135,7 @@ def _forward_from_parent(bot, update):
     INFOSTORE[user.id] = update.message.text
 
     #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
-
+    bot.editMessageReplyMarkup(reply_markup=None)
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     sendtext = INFOSTORE[user.id] +  "\n\n"
@@ -165,7 +165,7 @@ def _forward_from_baby(bot, update):
     INFOSTORE[user.id] = update.message.text
 
     #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
-
+    bot.editMessageReplyMarkup(reply_markup=None)
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     sendtext = INFOSTORE[user.id] + "\n\n"
@@ -195,6 +195,7 @@ def cancel(bot, update):
     query = update.callback_query
     user = query.from_user
     logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
+
 
     bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
                      message_id=update.message.message_id,

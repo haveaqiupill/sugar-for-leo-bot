@@ -1,2 +1,6 @@
-python_telegram_bot==10.0.1
-telegram==0.0.1
+certifi==2018.8.13
+chardet==3.0.4
+idna==2.7
+requests==2.19.1
+urllib3==1.23
+psycopg2-binary==2.7.6.1

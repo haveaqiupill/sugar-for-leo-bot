@@ -1,4 +1,4 @@
-﻿import json  # JSON lib
+import json  # JSON lib
 import requests  # HTTP lib
 import os  # used to access env variables
 import time
@@ -28,16 +28,6 @@ user_db = userdb()
 am_db = amdb()
 users = []  # list of users objects
 am_participants = []  # list of player chat_ids
-
-#CHAT IDS
-JINGYING = 508423467
-KERYIN = 384865431
-SHAHEEL = 99260110
-PRISCILIA = 181854022
-BLAKE = 559780833
-GERALD = 231696047
-AQILAH = 130512569
-BRIAN = 209469386
 
 # EMOJI UNICODE
 CAKE = u"\U0001F382"
@@ -297,16 +287,15 @@ class User:
         if text not in ADMIN_ID:
             send_message(INVALID_PIN, chat_id, self.name, reply_markup=remove_keyboard())
             return
+        else:
+            send_message(SEND_ADMIN_GREETING, chat_id, self.name, reply_markup=remove_keyboard())
+            self.stage = self.send_all
         elif text == SEND_ONE_KEY:
             send_message("Please key in the Game ID of the participant", chat_id, self.name)
             self.stage = self.receive_game_id
         elif text == CHECK_REGIS_KEY:
             send_message("Reply 'Y' to check registration status, or 'N' to return to mainmenu.", chat_id, self.name)
             self.stage = self.check_registration
-        else:
-            send_message(SEND_ADMIN_GREETING, chat_id, self.name, reply_markup=remove_keyboard())
-            self.stage = self.send_all
-
 
     # helper function that fetches chat_id from database using game_id and sends text to the chat_id
     def fetch_then_send(self, text, game_id):

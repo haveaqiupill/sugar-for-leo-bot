@@ -37,6 +37,10 @@ BLAKE = 559780833
 GERALD = 231696047
 AQILAH = 130512569
 BRIAN = 209469386
+NICHOLAS = 540825566
+YINGQI = 523934057
+ZHENGYI = 151469558
+JAMES = 277020493
 
 
 # Function to build buttons menu for every occasion
@@ -65,7 +69,7 @@ class User:
     def get_babyid(self):
         return self.babyid
 
-#USER OBJECTS
+#USER ASSIGNMENT
 keryin = User(KERYIN, JINGYING, SHAHEEL)
 jingying = User(JINGYING, SHAHEEL, KERYIN)
 shaheel = User(SHAHEEL, KERYIN, JINGYING)
@@ -198,7 +202,7 @@ def cancel(bot, update):
 
 
     bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
-                     message_id=update.message.message_id,
+                     message_id=None,
                      parse_mode=ParseMode.HTML)
 
     return ConversationHandler.END

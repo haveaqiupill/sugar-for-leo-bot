@@ -52,27 +52,10 @@ AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(3)
 
 # set up temporary store of info
 INFOSTORE = {}
+ASSIGN = {}
 
-def start(bot, update):
-    user = update.message.from_user
-    chatid = update.message.chat.id
-
-
-    bot.send_message(text=mainmenutext,
-                     parse_mode=ParseMode.HTML,
-                     chat_id=chatid)
-
-    update.message.reply_text(
-        'Firstly, please gimme consent for data collection thankiew\n\n' 
-        'I consent to providing my personal data for the purpose of Leo House Events. '
-        'I would also agree to receive important updates pertaining to matters contained in this survey. '
-        'All personal information will be kept confidential and be used only for the purpose of Leo House Events. '
-        'I understand that should I wish to withdraw my consent for the organising committee to contact me for the purposes stated above, '
-        'I could notify Qiu Jing Ying, Residential College 4, Leo House Committee Secretary, in writing to e0323887@u.nus.edu. '
-        'The organising committee will then remove my personal information from their database, and I allow 7 business days for my withdrawal of consent to take effect.',
-        reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
-
-    return AFTER_CONSENT
+def assign(user, sugarbaby, sugarparent):
+    
 
 
 def start(bot, update):
@@ -175,7 +158,7 @@ def _forward_from_baby(bot, update):
     messagefrombaby = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
     messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
 
-    update.message.reply_text(
+    bot.send_message(
         text=messagefrombaby,
         chat_id=JINGYING,
         message_id=update.message.message_id,

@@ -1,1 +1,1 @@
-worker: python ./main.py
+bot: python sugarforleobot.py

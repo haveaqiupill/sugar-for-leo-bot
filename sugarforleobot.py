@@ -54,7 +54,12 @@ AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(3)
 INFOSTORE = {}
 
 #USER OBJECTS
+keryin = User(KERYIN, jingying, shaheel)
+jingying = User(JINGYING, shaheel, keryin)
+shaheel = User(SHAHEEL, keryin, jingying)
 
+#KEY-VALUE PAIR
+ASSIGN = {KERYIN:keryin, JINGYING:jingying, SHAHEEL:shaheel}
 
 class User:
     def __init__(self, userid, sugarparent, sugarbaby):
@@ -139,7 +144,7 @@ def _forward_from_parent(bot, update):
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=JINGYING,
+        chat_id=ASSIGN[user.id].sugarbaby.id(),
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -169,7 +174,7 @@ def _forward_from_baby(bot, update):
 
     bot.send_message(
         text=messagefrombaby,
-        chat_id=JINGYING,
+        chat_id=ASSIGN[user.id].sugarparent.id(),
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

@@ -140,7 +140,7 @@ def _forward_from_parent(bot, update):
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=ASSIGN[user.id].babyid(),
+        chat_id=ASSIGN.get(user.id).babyid(),
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -170,7 +170,7 @@ def _forward_from_baby(bot, update):
 
     bot.send_message(
         text=messagefrombaby,
-        chat_id=ASSIGN[user.id].parentid(),
+        chat_id=ASSIGN.get(user.id).parentid(),
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

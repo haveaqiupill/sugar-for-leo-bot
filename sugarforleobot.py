@@ -202,6 +202,7 @@ def cancel(bot, update):
 
 
     bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
+                     chat_id=user.id,
                      message_id=None,
                      parse_mode=ParseMode.HTML)
 

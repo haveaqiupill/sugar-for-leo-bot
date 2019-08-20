@@ -56,7 +56,6 @@ INFOSTORE = {}
 class User:
     def __init__(self, userid, sugarparentid, sugarbabyid):
         self.id = userid
-        self.name = username
         self.parentid = sugarparentid
         self.babyid = sugarbabyid
 

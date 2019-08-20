@@ -53,14 +53,6 @@ AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(3)
 # set up temporary store of info
 INFOSTORE = {}
 
-#USER OBJECTS
-keryin = User(KERYIN, jingying, shaheel)
-jingying = User(JINGYING, shaheel, keryin)
-shaheel = User(SHAHEEL, keryin, jingying)
-
-#KEY-VALUE PAIR
-ASSIGN = {KERYIN:keryin, JINGYING:jingying, SHAHEEL:shaheel}
-
 class User:
     def __init__(self, userid, sugarparent, sugarbaby):
         self.id = userid
@@ -70,6 +62,13 @@ class User:
         self.parentid = sugarparent.id()
         self.babyid = sugarbaby.id()
 
+#USER OBJECTS
+keryin = User(KERYIN, jingying, shaheel)
+jingying = User(JINGYING, shaheel, keryin)
+shaheel = User(SHAHEEL, keryin, jingying)
+
+#KEY-VALUE PAIR
+ASSIGN = {KERYIN:keryin, JINGYING:jingying, SHAHEEL:shaheel}
 
 
 def start(bot, update):

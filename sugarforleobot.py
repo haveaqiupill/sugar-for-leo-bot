@@ -59,6 +59,12 @@ class User:
         self.parentid = sugarparentid
         self.babyid = sugarbabyid
 
+    def get_parentid(self):
+        return sugarparentid
+
+    def get_babyid(self):
+        return sugarbabyid
+
 #USER OBJECTS
 keryin = User(KERYIN, JINGYING, SHAHEEL)
 jingying = User(JINGYING, SHAHEEL, KERYIN)
@@ -140,7 +146,7 @@ def _forward_from_parent(bot, update):
 
     bot.send_message(
         text=messagefromparent,
-        chat_id=ASSIGN.get(user.id),
+        chat_id=ASSIGN.get(user.id).get_babyid(),
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -170,7 +176,7 @@ def _forward_from_baby(bot, update):
 
     bot.send_message(
         text=messagefrombaby,
-        chat_id=ASSIGN.get(user.id),
+        chat_id=ASSIGN.get(user.id).get_parentid(),
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

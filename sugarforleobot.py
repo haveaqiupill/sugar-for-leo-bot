@@ -115,7 +115,7 @@ jameslee = User(JAMESLEE, YINGQI, JINGYING,
 
 
 #KEY-VALUE PAIR
-ASSIGN = {KERYIN:keryin, JINGYING:jingying, SHAHEEL:shaheel, YINGQI:yingqi, PRISCILIA:priscilia, JAMESLEE:jameslee}
+ASSIGN = {KERYIN:keryin, SHAHEEL:shaheel, YINGQI:yingqi, PRISCILIA:priscilia, JAMESLEE:jameslee}
 
 
 def start(bot, update):

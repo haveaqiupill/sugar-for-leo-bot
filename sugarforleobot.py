@@ -124,7 +124,7 @@ def start(bot, update):
 
     if ASSIGN.get(user.id) is None:
 
-        bot.send_message("Sorry you are not registered yet!")
+        bot.send_message(text="Sorry you are not registered yet!")
 
         return ConversationHandler.END
 

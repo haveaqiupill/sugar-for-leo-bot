@@ -818,6 +818,12 @@ def _forward_from_parent(bot, update):
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
+    bot.send_message(
+        chat_id=admin_group_id,
+        text=messagefromparent,
+        message_id=update.message.message_id,
+        parse_mode=ParseMode.HTML)
+
     update.message.reply_text(text=sendtext, parse_mode=ParseMode.HTML)
     return ConversationHandler.END
 
@@ -840,6 +846,12 @@ def _forward_from_baby(bot, update):
 
     bot.send_message(
         chat_id=ASSIGN.get(user.id).get_parentid(),
+        text=messagefrombaby,
+        message_id=update.message.message_id,
+        parse_mode=ParseMode.HTML)
+
+    bot.send_message(
+        chat_id=admin_group_id,
         text=messagefrombaby,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)

@@ -145,7 +145,7 @@ def _forward_from_parent(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
 
-    changedMessage = update.message.text.replace("<", "\\<")
+    changedMessage = update.message.text.replace("<", "\<")
     INFOSTORE[user.id] = changedMessage
 
     #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
@@ -176,8 +176,8 @@ def _forward_from_parent(bot, update):
 def _forward_from_baby(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
-    
-    changedMessage = update.message.text.replace("<", "\\<")
+
+    changedMessage = update.message.text.replace("<", "\<")
     INFOSTORE[user.id] = changedMessage
 
     #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])

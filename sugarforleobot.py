@@ -697,8 +697,7 @@ juin = User(JUIN, POR, CALISTA, "anything", "things other than anything",
 
 
 #KEY-VALUE PAIR
-ASSIGN = {KERYIN:keryin,
-JINGYING:jingying, SHAHEEL:shaheel, YINGQI:yingqi, PRISCILIA:priscilia, JAMESLEE:jameslee, JAMESCHUA:jameschua,
+ASSIGN = { SHAHEEL:shaheel, YINGQI:yingqi, PRISCILIA:priscilia, JAMESLEE:jameslee, JAMESCHUA:jameschua,
 BLAKE:blake, AQILAH:aqilah, ZHENGYI:zhengyi, FELICIA:felicia, SHAOCONG:shaocong, MINGHUI:minghui, SHAE:shae,
 THERESA:theresa, JUIN:juin, CAROLINE:caroline, HUIKUN:huikun, HUAIZHE:huaizhe, JEFFREY:jeffrey, HAOYU:haoyu, GLEN:glen,
 TJIONGHANN:tjionghann, RACHELPOO:rachelpoo, YUCHEN:yuchen, JIANING:jianing, SHRUTI:shruti, HANWEI:hanwei, BENJAMIN:benjamin,

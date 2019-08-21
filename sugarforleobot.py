@@ -170,18 +170,6 @@ DAPHNE = 248976073
 
 
 #USER ASSIGNMENT (KEYNAME, sugarparent, sugarbaby, likes, dislikes, remarks, unit, tolerance level, name)
-keryin = User(KERYIN, JAMESCHUA, JINGYING,
-              "bbt bbt bbt bbt bbt bbt food green tea seaweed",
-              "no creatures please",
-              "no living/dead/fake creatures, animals etc etc. please dont take my stuff out too :(", "#14-12F",
-              "4",
-              "Yeo Ker Yin")
-
-jingying = User(JINGYING, KERYIN, BRYSON, "Bubble tea (liho brown sugar fresh milk w pearls), erm im ok w anything actually", "Idk but not too extreme pranks please D:",
-                "Please dont touch my things in my room (expensive stuffz!!) And no hair removal cream!!",
-                "#14-12A",
-                "3",
-                "Qiu Jing Ying")
 
 shaheel = User(SHAHEEL, JEDREK, JAMESCHUA,
                "I like snacks yEy",
@@ -212,7 +200,7 @@ jameslee = User(JAMESLEE, GERALD, ZHENGYI, "A new friend! (optional teh peng)", 
                 "2",
                 "James Lee")
 
-jameschua = User(JAMESCHUA, SHAHEEL, KERYIN, "...cooking supplies? Tools? Sauces?",
+jameschua = User(JAMESCHUA, SHAHEEL, BRYSON, "...cooking supplies? Tools? Sauces?",
                  "Oh no... I guess rlly dont like wasabi",
                  "Please nothing that takes more than an hr to reset my room",
                  "#14-01C",
@@ -602,7 +590,7 @@ jedrek = User(JEDREK, BRIAN, SHAHEEL,
 
 
 
-bryson = User(BRYSON, JINGYING, ZHENLIN, "Teh bing or Teh O bing pls", "Not falling for this trick question",
+bryson = User(BRYSON, JAMESCHUA, ZHENLIN, "Teh bing or Teh O bing pls", "Not falling for this trick question",
               "Please dont destroy my personal stuff :) I dont really care if you rekt the college property",
               "#14-06",
               "3",

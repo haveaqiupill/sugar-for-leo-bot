@@ -228,8 +228,11 @@ laurence = User(LAURENCE, JAMESLEE, COLIN,
                 "2",
                 "Laurence Lu")
 
-colin = User(COLIN, LAURENCE, JEFFREY, "Floppy Discs... Orca themed stuff...", "Anything messy, be it liquid or powder", "Do not dig through my belongings",
-             "#13-11C"
+colin = User(COLIN, LAURENCE, JEFFREY,
+             "Floppy Discs... Orca themed stuff...",
+             "Anything messy, be it liquid or powder",
+             "Do not dig through my belongings",
+             "#13-11C",
              "2",
              "Colin Ng")
 

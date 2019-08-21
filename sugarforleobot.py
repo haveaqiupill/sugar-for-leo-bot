@@ -171,7 +171,7 @@ DAPHNE = 248976073
 
 #USER ASSIGNMENT (KEYNAME, sugarparent, sugarbaby, likes, dislikes, remarks, unit, tolerance level, name)
 keryin = User(KERYIN, JAMESCHUA, JINGYING,
-              "bbt bbt bbt bbt bbt bbt food green tea seaweed <3",
+              "bbt bbt bbt bbt bbt bbt food green tea seaweed",
               "no creatures please",
               "no living/dead/fake creatures, animals etc etc. please dont take my stuff out too :(", "#14-12F",
               "4",

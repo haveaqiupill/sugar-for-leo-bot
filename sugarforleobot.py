@@ -210,7 +210,7 @@ def _forward_from_parent(bot, update):
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
-    update.message.reply_text(sendtext)
+    update.message.reply_text(text=sendtext, parse_mode=ParseMode.HTML)
     return ConversationHandler.END
 
 def _forward_from_baby(bot, update):
@@ -242,7 +242,7 @@ def _forward_from_baby(bot, update):
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
-    update.message.reply_text(sendtext)
+    update.message.reply_text(text=sendtext, parse_mode=ParseMode.HTML)
     return ConversationHandler.END
 
 

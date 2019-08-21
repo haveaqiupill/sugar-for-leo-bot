@@ -190,19 +190,26 @@ def send_to_baby(bot, update):
 
     return FORWARD_PARENT
 
+def markdown(string):
+    edited = string.replace("<", "&lt;")
+    edited.replace("&", "&amp")
+    edited.replace("\"", "&quot")
+    edited.replace("\'", "&#39;")
+    return edited
+
 
 def _forward_from_parent(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
 
-    changedMessage = update.message.text.replace("<", "&lt;")
+    changedMessage = markdown(update.message.text)
     INFOSTORE[user.id] = changedMessage
 
     #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
     logger.info("Message of %s: %s", user.first_name, changedMessage)
 
-    sendtext = "\\'" + INFOSTORE[user.id] + "\\'" +  "\n\n"
+    sendtext = "&quot" + INFOSTORE[user.id] + "&quot" +  "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. \n\n<b>Press /start to send again!</b>'
 
     messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
@@ -234,7 +241,7 @@ def _forward_from_baby(bot, update):
 
     logger.info("Message of %s: %s", user.first_name, changedMessage)
 
-    sendtext = "\\'" + INFOSTORE[user.id] + "\\'" + "\n\n"
+    sendtext = "&quot" + INFOSTORE[user.id] + "&quot" + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. \n\n<b>Press /start to send again!</b>'
 
     messagefrombaby = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]

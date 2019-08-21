@@ -687,21 +687,21 @@ marisa = User(MARISA, SHAE, THERESA,
               "1",
               "Marisa")
 
-theresa = User(THERESA, MARISA, SEAKPOR,
+theresa = User(THERESA, MARISA, POR,
                "Anything but lizards",
                "LIZARDS? What do u mean can be used against me",
                "Lizards", "#14-21",
                "1",
                "Theresa")
 
-seakpor = User(SEAKPOR, THERESA, JUIN,
+por = User(POR, THERESA, JUIN,
                "Memorable/Personalized stuff, handicraft, stationary "
                "like journey books or planner (I usually collect for my collection but not for use)",
                "scary pictures", "Any of my stuffs being moved; this would make me anxious", "#12-19",
                "1",
                "Seak Por")
 
-juin = User(JUIN, SEAKPOR, CALISTA, "anything", "things other than anything",
+juin = User(JUIN, POR, CALISTA, "anything", "things other than anything",
             "Dont disturb me sleeping :-)", "#13-11A",
             "1",
             "Juin Hwaye")

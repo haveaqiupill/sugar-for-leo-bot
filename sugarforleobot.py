@@ -46,13 +46,16 @@ AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(3)
 INFOSTORE = {}
 
 class User:
-    def __init__(self, userid, sugarparentid, sugarbabyid, likes, dislikes, remarks):
+    def __init__(self, userid, sugarparentid, sugarbabyid, likes, dislikes, remarks, unit, tolerance_level, name):
         self.id = userid
         self.parentid = sugarparentid
         self.babyid = sugarbabyid
         self.likes = likes
         self.dislikes = dislikes
         self.remarks = remarks
+        self.unit = unit
+        self.tolerance_level = tolerance_level
+        self.name = name
 
     def get_parentid(self):
         return self.parentid
@@ -68,6 +71,15 @@ class User:
 
     def get_remarks(self):
         return self.remarks
+
+    def get_unit(self):
+        return self.unit
+
+    def get_tolerance_level(self):
+        return self.tolerance_level
+
+    def get_name(self):
+        return self.name
 
 #CHAT IDS
 JINGYING = 508423467
@@ -89,29 +101,47 @@ JAMESLEE = 200746779
 keryin = User(KERYIN, JINGYING, SHAHEEL,
               "bbt bbt bbt bbt bbt bbt food ",
               "no creatures please",
-              "no living/dead/fake creatures, animals etc etc. please dont take my stuff out too :')")
+              "no living/dead/fake creatures, animals etc etc. please dont take my stuff out too :')",
+              "#14-12F",
+              "4",
+              "Yeo Ker Yin")
 jingying = User(JINGYING, SHAHEEL, KERYIN,
                 "Bubble tea (liho brown sugar fresh milk w pearls), erm im ok w anything actually",
                 "Idk but not too extreme pranks please D:",
-                "Please don't touch my things in my room (expensive stuffz!!) And no hair removal cream!!")
+                "Please don't touch my things in my room (expensive stuffz!!) And no hair removal cream!!",
+                "#14-12A",
+                "3",
+                "Qiu Jing Ying")
 shaheel = User(SHAHEEL, KERYIN, JINGYING,
                "I like snacks yEy",
                "I dislike slimy things... ",
                "Please do not touch my captain America popart and my decorations that are hanging on my wall, "
-               "I really put a lot of effort into making them and I don’t want to see them missing/destroyed")
+               "I really put a lot of effort into making them and I don’t want to see them missing/destroyed",
+               "#13-18",
+               "5",
+               "Shaheel A Serajudeen")
 yingqi = User(YINGQI, PRISCILIA, JAMESLEE,
               "nice stuff outside my door thx, easy to clean up pranks thx :))",
               "up to u ;) don wreck my room ",
-              "no flour, no red beans/green beans/ granular stuff")
+              "no flour, no red beans/green beans/ granular stuff",
+              "#14-12C",
+              "3",
+              "Tay Ying Qi")
 priscilia = User(PRISCILIA, SHAHEEL, YINGQI,
                  "i like cute stationery hehe, and i have a sweet tooth so, good food :-)",
                  "wah i dont like bananas, durians AND I CANNOT TAKE SPICY FOOD, no mala for me",
                  "please dont prank anything that requires much clean up or ruin my stuff haha (no dirty stuff on my bed!!) "
-                 "and i seriously hate rodents and lizards so please don't put any fakes in my vicinity D:")
+                 "and i seriously hate rodents and lizards so please don't put any fakes in my vicinity D:",
+                 "#12-14",
+                 "4",
+                 "Priscilia Chow Kailin")
 jameslee = User(JAMESLEE, YINGQI, JINGYING,
                 "A new friend! (optional teh peng)",
                 "nothing in particular",
-                "dont enter my room and nothing hard to clean up thx :D")
+                "dont enter my room and nothing hard to clean up thx :D",
+                "#13-16",
+                "2",
+                "James Lee")
 
 
 #KEY-VALUE PAIR
@@ -179,7 +209,9 @@ def send_to_baby(bot, update):
     babyID = ASSIGN.get(user.id).get_babyid()
     baby = ASSIGN.get(babyID)
 
-    sendtext = HEART + "<b>Here are the likes of your sugar baby:</b>" + HEART + "\n" + baby.get_likes()  + "\n\n"
+    sendtext = "<b>Your sugar baby is</b> " + baby.get_name() + ", staying in " + baby.get_unit() + "\n\n"
+    sendtext += "<b>Tolerance level:</b> " + baby.get_tolerance_level() + "\n\n"
+    sendtext += HEART + "<b>Here are the likes of your sugar baby:</b>" + HEART + "\n" + baby.get_likes()  + "\n\n"
     sendtext += CROSS + "<b>Here are the dislikes of your sugar baby:</b>" + CROSS + "\n"  + baby.get_dislikes()  + "\n\n"
     sendtext += "<b>Please take these remarks seriously!!:</b> \n" + baby.get_remarks() + "\n\n"
     sendtext += "<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
@@ -213,7 +245,7 @@ def _forward_from_parent(bot, update):
     sendtext += 'Thank you! Your message has been forwarded. \n\n<b>Press /start to send again!</b>'
 
     messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
-    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar baby: \n\n" + INFOSTORE[user.id]
+    messagetoadmin = user.first_name + " of username " + (user.username if user.username else user.first_name) + " sent this to the sugar baby: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
         text=messagefromparent,
@@ -245,7 +277,7 @@ def _forward_from_baby(bot, update):
     sendtext += 'Thank you! Your message has been forwarded. \n\n<b>Press /start to send again!</b>'
 
     messagefrombaby = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
-    messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
+    messagetoadmin = user.first_name + " of username " + (user.username if user.username else user.first_name) + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
         text=messagefrombaby,

@@ -444,7 +444,7 @@ tjionghann = User(TJIONGHANN, GLEN, HAZEL, "food", "mess", "not too much clean u
                   "Lim Tjiong Hann")
 
 hazel = User(HAZEL, TJIONGHANN, JIANING, "dark choco/food/bbt", "messy stuff",
-             "dont touch my music stuff (bc its ex :< )",
+             "dont touch my music stuff (bc its ex)",
              "#14-12B",
              "2",
              "Hazel Pak")
@@ -546,8 +546,8 @@ aqilah = User(AQILAH, YAOYUAN, BELLA,
               "Aqilah")
 bella = User(BELLA, AQILAH, MICHELLE,
              "Anything unexpected/fun",
-             "My room to be messed up >< I am lazy af. Also I dislike Shaheel",
-             "Please dont do anything irreversible to my stuff >< "
+             "My room to be messed up I am lazy af. Also I dislike Shaheel",
+             "Please dont do anything irreversible to my stuff "
              "Also take note: the random strips of gel thingys "
              "pasted on my walls/floor are ant baits, please dont touch them theyre poisonous",
              "#12-11D",
@@ -686,7 +686,7 @@ theresa = User(THERESA, MARISA, POR,
 por = User(POR, THERESA, JUIN,
                "Memorable/Personalized stuff, handicraft, stationary "
                "like journey books or planner (I usually collect for my collection but not for use)",
-               "scary pictures", "Any of my stuffs being moved; this would make me anxious", "#12-19",
+               "scary pictures", "Any of my stuffs being moved this would make me anxious", "#12-19",
                "1",
                "Seak Por")
 

@@ -43,6 +43,7 @@ ZHENGYI = 151469558
 JAMES = 277020493
 
 
+
 # Function to build buttons menu for every occasion
 def build_menu(buttons, n_cols, header_buttons, footer_buttons):
     menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
@@ -77,7 +78,7 @@ yingqi = User(YINGQI, PRISCILIA, SHAHEEL)
 priscilia = User(PRISCILIA, SHAHEEL, YINGQI)
 
 #KEY-VALUE PAIR
-ASSIGN = {KERYIN:keryin, JINGYING:jingying, SHAHEEL:shaheel}
+ASSIGN = {KERYIN:keryin, JINGYING:jingying, SHAHEEL:shaheel, YINGQI:yingqi, PRISCILIA:priscilia}
 
 
 def start(bot, update):

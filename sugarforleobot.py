@@ -195,12 +195,12 @@ def _forward_from_parent(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
 
-    changedMessage = update.message.text.replace("<", r"\<")
+    changedMessage = update.message.text.replace("<", "\\<")
     INFOSTORE[user.id] = changedMessage
 
     #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
-    logger.info("Message of %s: %s", user.first_name, update.message.text)
+    logger.info("Message of %s: %s", user.first_name, changedMessage)
 
     sendtext = "\\'" + INFOSTORE[user.id] + "\\'" +  "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. \n\n<b>Press /start to send again!</b>'
@@ -227,12 +227,12 @@ def _forward_from_baby(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
 
-    changedMessage = update.message.text.replace("<", r"\<")
+    changedMessage = update.message.text.replace("<", "\\<")
     INFOSTORE[user.id] = changedMessage
 
     #bot.delete_message(chat_id=update.message.chat_id, message_id=INFOSTORE[user.id]["BotMessageID"])
 
-    logger.info("Message of %s: %s", user.first_name, update.message.text)
+    logger.info("Message of %s: %s", user.first_name, changedMessage)
 
     sendtext = "\\'" + INFOSTORE[user.id] + "\\'" + "\n\n"
     sendtext += 'Thank you! Your message has been forwarded. \n\n<b>Press /start to send again!</b>'

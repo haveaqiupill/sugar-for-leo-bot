@@ -30,22 +30,6 @@ SMILEY = u"\U0001F642"
 HEART = u"\u2764"
 CROSS = u"\u274C"
 
-#CHAT IDS
-JINGYING = 508423467
-KERYIN = 384865431
-SHAHEEL = 99260110
-PRISCILIA = 181854022
-BLAKE = 559780833
-GERALD = 231696047
-AQILAH = 130512569
-BRIAN = 209469386
-NICHOLAS = 540825566
-YINGQI = 523934057
-ZHENGYI = 151469558
-JAMESCHUA = 277020493
-JAMESLEE = 200746779
-
-
 
 # Function to build buttons menu for every occasion
 def build_menu(buttons, n_cols, header_buttons, footer_buttons):
@@ -84,6 +68,22 @@ class User:
 
     def get_remarks(self):
         return self.remarks
+
+#CHAT IDS
+JINGYING = 508423467
+KERYIN = 384865431
+SHAHEEL = 99260110
+PRISCILIA = 181854022
+BLAKE = 559780833
+GERALD = 231696047
+AQILAH = 130512569
+BRIAN = 209469386
+NICHOLAS = 540825566
+YINGQI = 523934057
+ZHENGYI = 151469558
+JAMESCHUA = 277020493
+JAMESLEE = 200746779
+
 
 #USER ASSIGNMENT
 keryin = User(KERYIN, JINGYING, SHAHEEL,
@@ -193,7 +193,7 @@ def _forward_from_parent(bot, update):
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     sendtext = INFOSTORE[user.id] +  "\n\n"
-    sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
+    sendtext += 'Thank you! Your message has been forwarded. <b>Press /start to send again!</b>'
 
     messagefromparent = '<b>Hello! Your sugar parent wants to say:</b>\n\n' + INFOSTORE[user.id]
     messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar baby: \n\n" + INFOSTORE[user.id]
@@ -225,7 +225,7 @@ def _forward_from_baby(bot, update):
     logger.info("Message of %s: %s", user.first_name, update.message.text)
 
     sendtext = INFOSTORE[user.id] + "\n\n"
-    sendtext += 'Thank you! Your message has been forwarded. Type /start to send again'
+    sendtext += 'Thank you! Your message has been forwarded. <b>Press /start to send again!</b>'
 
     messagefrombaby = '<b>Hello! Your sugar baby wants to say:</b>\n\n' + INFOSTORE[user.id]
     messagetoadmin = user.first_name + " of username " + user.username + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]

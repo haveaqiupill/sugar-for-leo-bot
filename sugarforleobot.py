@@ -65,6 +65,7 @@ class User:
         self.parentid = sugarparentid
         self.babyid = sugarbabyid
         self.likes = likes
+        self.dislikes = dislikes
 
     def get_parentid(self):
         return self.parentid

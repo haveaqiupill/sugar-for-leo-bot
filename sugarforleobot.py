@@ -429,7 +429,7 @@ ian = User(IAN, YANKAI, HUAIZHE, "Meat, free condoms", "I hate sweat",
 
 huaizhe = User(HUAIZHE, IAN, BLAKE, "anything possible",
                "glue",
-               "Don’t dirty my bed please", "#13-11E",
+               "Dont dirty my bed please", "#13-11E",
                "2",
                "Yeo Huai Zhe")
 
@@ -558,9 +558,9 @@ aqilah = User(AQILAH, YAOYUAN, BELLA,
 bella = User(BELLA, AQILAH, MICHELLE,
              "Anything unexpected/fun",
              "My room to be messed up >< I am lazy af. Also I dislike Shaheel",
-             "Please don't do anything irreversible to my stuff >< "
+             "Please dont do anything irreversible to my stuff >< "
              "Also take note: the random strips of gel thingys "
-             "pasted on my walls/floor are ant baits, please don't touch them they're poisonous",
+             "pasted on my walls/floor are ant baits, please dont touch them theyre poisonous",
              "#12-11D",
              "5",
              "Bella Zhang")
@@ -568,24 +568,24 @@ bella = User(BELLA, AQILAH, MICHELLE,
 michelle = User(MICHELLE, BELLA, PRISCILIA,
                 "food/drinks, anything small/cute actually",
                 "had my room furniture turned upside down last year "
-                "(just to make sure that the prank doesn't get repeated this year lmao), "
+                "(just to make sure that the prank doesnt get repeated this year lmao), "
                 "i have 8.30 am on tues and fri and i will be inconvenienced if sth funny happens then",
                 "be nice to the bear on my bed, no horror stuff pls i have the heart of an old man, "
-                "don't remove furniture from my room, nothing alive/used to be alive, "
+                "dont remove furniture from my room, nothing alive/used to be alive, "
                 "nothing too hard to clean up (eg glitter, oil, FISH, egg) :-)", "#12-18",
                 "4", "Michelle Lee")
 
 
 mingzhe = User(MINGZHE, PRISCILIA, BRIAN,
-               "Thoughtful gifts! (handwritten notes, DIY stuff cus I can't do arts for nuts)",
-               "Slanderous stuff I guess", "Stuff that can't be wiped off/destroys my electronics",
+               "Thoughtful gifts! (handwritten notes, DIY stuff cus I cant do arts for nuts)",
+               "Slanderous stuff I guess", "Stuff that cant be wiped off/destroys my electronics",
                "#13-07",
                "5",
                "Wang Ming Zhe")
 
 brian = User(BRIAN, MINGZHE, JEDREK,
              "Japanese snacks! Or anything really!",
-             "MONEY. Jkjk I don't really have any major dislikes, "
+             "MONEY. Jkjk I dont really have any major dislikes, "
              "just the standard stuff like cockroaches I guess?",
              "Nothing that would leave permanent damage in my room / to my stuff please!",
              "#14-03",
@@ -594,7 +594,7 @@ brian = User(BRIAN, MINGZHE, JEDREK,
 
 jedrek = User(JEDREK, BRIAN, SHAHEEL,
               "I like to have a CAP 5.0", "humans",
-              "Please don't put anything that will attract insects as my room is near the rubbish chute",
+              "Please dont put anything that will attract insects as my room is near the rubbish chute",
               "#14-10",
               "5",
               "Jedrek Loo")
@@ -646,7 +646,7 @@ esther = User(ESTHER, FELICIA, SHAOCONG,
               "Esther Tay")
 
 shaocong = User(SHAOCONG, ESTHER, AMI, "A new friend:) Jk jk chocolate/handwritten cards are nice",
-                "-", "Please don't enter my room :) hahaha",
+                "-", "Please dont enter my room :) hahaha",
                 "#13-19",
                 "1",
                 "Shao Cong")
@@ -680,8 +680,8 @@ shae = User(SHAE, LIONEL, MARISA, "Matcha stuff, anything with a sense of humour
 
 marisa = User(MARISA, SHAE, THERESA,
               "healthy snacks, gym towels, cool stickers, cool iron-on patches, "
-              "cool keychains, anything related to coldplay, anything retro/70's "
-              "80's themed, anything related to art and music!",
+              "cool keychains, anything related to coldplay, anything retro/70s "
+              "80s themed, anything related to art and music!",
               "nothing too girly, sweets or chocolates (i love dark chocolate only hehe), "
               "anything unhealthy", "-", "#12-11F",
               "1",

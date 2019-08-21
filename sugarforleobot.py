@@ -140,7 +140,7 @@ NICHOLAS = 540825566
 MARISA = 685572314
 JAMESCHUA = 277020493
 POR = 218893278
-ZESS = 218893278
+ZESS = 91434224
 CHLOE = 141677603
 COLIN = 806781370
 LAURENCE = 677265725
@@ -820,7 +820,7 @@ def _forward_from_parent(bot, update):
 
     bot.send_message(
         chat_id=admin_group_id,
-        text=messagefromparent,
+        text=messagetoadmin,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -852,7 +852,7 @@ def _forward_from_baby(bot, update):
 
     bot.send_message(
         chat_id=admin_group_id,
-        text=messagefrombaby,
+        text=messagetoadmin,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

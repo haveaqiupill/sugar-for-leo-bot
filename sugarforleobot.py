@@ -127,12 +127,7 @@ def send_to_parent(bot, update):
     user = query.from_user
     logger.info("User {} has just chose to talk to the sugar parent".format(user.username if user.username else user.first_name))
 
-    parentID = ASSIGN.get(user.id).get_parentid()
-    parent = ASSIGN.get(parentID)
-
-    sendtext = "<b>Here are the likes of your sugar parent:</b> \n" + parent.get_likes() + "\n\n"
-    sendtext += "<b>Here are the dislikes of your sugar parent:</b> \n" + parent.get_dislikes() + "\n\n"
-    sendtext += "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
+    sendtext = "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
 
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
 
@@ -148,9 +143,9 @@ def send_to_baby(bot, update):
     babyID = ASSIGN.get(user.id).get_babyid()
     baby = ASSIGN.get(babyID)
 
-    sendtext = "<b>Here are the likes of your sugar parent:</b> \n" + baby.get_likes() + "\n\n"
-    sendtext += "<b>Here are the dislikes of your sugar parent:</b> \n" + baby.get_dislikes() + "\n\n"
-    sendtext += "<b>What do you want to tell your sugar parent?</b>" + "\n\nType and send me your message below:"
+    sendtext = "<b>Here are the likes of your sugar baby:</b> \n" + baby.get_likes() + "\n\n"
+    sendtext += "<b>Here are the dislikes of your sugar baby:</b> \n" + baby.get_dislikes() + "\n\n"
+    sendtext += "<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)
 

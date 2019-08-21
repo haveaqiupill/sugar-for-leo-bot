@@ -383,7 +383,8 @@ gerald = User(GERALD, GORDON, JAMESLEE, "Churros, Donuts, Cookies, Chocolates",
               "3",
               "Gerald Ng")
 
-zhengyi = User(ZHENGYI, JAMESLEE, GALEN, "Hard Liquor, Nintendo Switch, New Mahjong Set",
+zhengyi = User(ZHENGYI, JAMESLEE, GALEN,
+               "Hard Liquor, Nintendo Switch, New Mahjong Set",
                "dolls",
                "dont touch my desktop or pc or monitor setup thanks",
                "#13-11D",
@@ -822,8 +823,8 @@ def _forward_from_parent(bot, update):
     messagetoadmin = user.first_name + " of username " + (user.username if user.username else user.first_name) + " sent this to the sugar baby: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
-        text=messagefromparent,
         chat_id=ASSIGN.get(user.id).get_babyid(),
+        text=messagefromparent,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 
@@ -848,8 +849,8 @@ def _forward_from_baby(bot, update):
     messagetoadmin = user.first_name + " of username " + (user.username if user.username else user.first_name) + " sent this to the sugar parent: \n\n" + INFOSTORE[user.id]
 
     bot.send_message(
-        text=messagefrombaby,
         chat_id=ASSIGN.get(user.id).get_parentid(),
+        text=messagefrombaby,
         message_id=update.message.message_id,
         parse_mode=ParseMode.HTML)
 

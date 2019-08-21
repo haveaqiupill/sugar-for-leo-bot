@@ -623,10 +623,10 @@ calista = User(CALISTA, JUIN, FELICIA,
                "1",
                "Calista Loh")
 
-felicia = User(FELICIA, CALISTA, ESTHER, "pretty stationary and notebooks :)",
+felicia = User(FELICIA, CALISTA, ESTHER, "pretty stationary and notebooks",
                "8am anything, paiseh, dairy products",
                "no insects or creatures in my room please! and if my door is "
-               "locked just put like a post it etc. to remind me to unlock if needed :)", "#12-17",
+               "locked just put like a post it etc. to remind me to unlock if needed", "#12-17",
                "1",
                "Felicia")
 

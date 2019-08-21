@@ -62,12 +62,13 @@ AFTER_CONSENT, FORWARD_PARENT, FORWARD_BABY= range(3)
 INFOSTORE = {}
 
 class User:
-    def __init__(self, userid, sugarparentid, sugarbabyid, likes, dislikes):
+    def __init__(self, userid, sugarparentid, sugarbabyid, likes, dislikes, remarks):
         self.id = userid
         self.parentid = sugarparentid
         self.babyid = sugarbabyid
         self.likes = likes
         self.dislikes = dislikes
+        self.remarks = remarks
 
     def get_parentid(self):
         return self.parentid
@@ -81,13 +82,36 @@ class User:
     def get_dislikes(self):
         return self.dislikes
 
+    def get_remarks(self):
+        return self.remarks
+
 #USER ASSIGNMENT
-keryin = User(KERYIN, JINGYING, SHAHEEL, "bbt bbt bbt bbt bbt bbt food ",  "no creatures please")
-jingying = User(JINGYING, SHAHEEL, KERYIN, "Bubble tea (liho brown sugar fresh milk w pearls), erm im ok w anything actually", "Idk but not too extreme pranks please D:")
-shaheel = User(SHAHEEL, KERYIN, JINGYING, "I like snacks yEy", "I dislike slimy things... ")
-yingqi = User(YINGQI, PRISCILIA, JAMESLEE, "nice stuff outside my door thx, easy to clean up pranks thx :))", "up to u ;) don wreck my room ")
-priscilia = User(PRISCILIA, SHAHEEL, YINGQI, "i like cute stationery hehe, and i have a sweet tooth so, good food :-)", "wah i dont like bananas, durians AND I CANNOT TAKE SPICY FOOD, no mala for me")
-jameslee = User(JAMESLEE, YINGQI, JINGYING, "A new friend! (optional teh peng)", "nothing in particular")
+keryin = User(KERYIN, JINGYING, SHAHEEL,
+              "bbt bbt bbt bbt bbt bbt food ",
+              "no creatures please",
+              "no living/dead/fake creatures, animals etc etc. please dont take my stuff out too :')")
+jingying = User(JINGYING, SHAHEEL, KERYIN,
+                "Bubble tea (liho brown sugar fresh milk w pearls), erm im ok w anything actually",
+                "Idk but not too extreme pranks please D:",
+                "Please don't touch my things in my room (expensive stuffz!!) And no hair removal cream!!")
+shaheel = User(SHAHEEL, KERYIN, JINGYING,
+               "I like snacks yEy",
+               "I dislike slimy things... ",
+               "Please do not touch my captain America popart and my decorations that are hanging on my wall, "
+               "I really put a lot of effort into making them and I don’t want to see them missing/destroyed")
+yingqi = User(YINGQI, PRISCILIA, JAMESLEE,
+              "nice stuff outside my door thx, easy to clean up pranks thx :))",
+              "up to u ;) don wreck my room ",
+              "no flour, no red beans/green beans/ granular stuff")
+priscilia = User(PRISCILIA, SHAHEEL, YINGQI,
+                 "i like cute stationery hehe, and i have a sweet tooth so, good food :-)",
+                 "wah i dont like bananas, durians AND I CANNOT TAKE SPICY FOOD, no mala for me",
+                 "please dont prank anything that requires much clean up or ruin my stuff haha (no dirty stuff on my bed!!) "
+                 "and i seriously hate rodents and lizards so please don't put any fakes in my vicinity D:")
+jameslee = User(JAMESLEE, YINGQI, JINGYING,
+                "A new friend! (optional teh peng)",
+                "nothing in particular",
+                "dont enter my room and nothing hard to clean up thx :D")
 
 
 #KEY-VALUE PAIR
@@ -145,8 +169,9 @@ def send_to_baby(bot, update):
     babyID = ASSIGN.get(user.id).get_babyid()
     baby = ASSIGN.get(babyID)
 
-    sendtext = HEART + "<b>Here are the likes of your sugar baby:</b> \n" + HEART + baby.get_likes()  + "\n\n"
-    sendtext += CROSS + "<b>Here are the dislikes of your sugar baby:</b> \n" + CROSS + baby.get_dislikes()  + "\n\n"
+    sendtext = HEART + "<b>Here are the likes of your sugar baby:</b>" + HEART + "\n" + baby.get_likes()  + "\n\n"
+    sendtext += CROSS + "<b>Here are the dislikes of your sugar baby:</b>" + CROSS + "\n"  + baby.get_dislikes()  + "\n\n"
+    sendtext += "<b>Please take these remarks seriously!!:</b> \n" + baby.get_remarks() + "\n\n"
     sendtext += "<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)

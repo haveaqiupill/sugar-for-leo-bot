@@ -371,7 +371,7 @@ gerald = User(GERALD, GORDON, JAMESLEE, "Churros, Donuts, Cookies, Chocolates",
               "3",
               "Gerald Ng")
 
-zhengyi = User(ZHENGYI, JAMESLEE, GALEN,
+zhengyi = User(ZHENGYI, DAPHNE, GALEN,
                "Hard Liquor, Nintendo Switch, New Mahjong Set",
                "dolls",
                "dont touch my desktop or pc or monitor setup thanks",

@@ -122,30 +122,37 @@ def start(bot, update):
     user = update.message.from_user
     chatid = update.message.chat.id
 
-    mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
-    mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + 'What do you want to do? \n\nTake note: you can only send one text message per time via this bot! If you want to send another message, press /start again.'
+    if ASSIGN.get(user.id) is None:
 
-    button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
-                   InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
-                   InlineKeyboardButton(text='Cancel', callback_data='cancel')]
+        bot.send_message("Sorry you are not registered yet!")
 
-    logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
+        return ConversationHandler.END
 
-    menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
+    else:
+        mainmenutext = "<b>Hello {}!</b>\n\n".format(user.username if user.username else user.first_name)
+        mainmenutext += LION + " Welcome to Sugar for Leo! " + LION + "\n" + 'What do you want to do? \n\nTake note: you can only send one text message per time via this bot! If you want to send another message, press /start again.'
 
-    # set up INFOSTORE
-    INFOSTORE[user.id] = {}
-    INFOSTORE[user.id]["BotMessageID"] = []
+        button_list = [InlineKeyboardButton(text='Talk to my sugar parent', callback_data='toparent'),
+                       InlineKeyboardButton(text='Talk to my sugar baby', callback_data='tobaby'),
+                       InlineKeyboardButton(text='Cancel', callback_data='cancel')]
 
-    msgsent = bot.send_message(text=mainmenutext,
-                               chat_id=chatid,
-                               reply_markup=InlineKeyboardMarkup(menu),
-                               parse_mode=ParseMode.HTML)
+        logger.info("User %s of id %s: %s", user.first_name, user.id, update.message.text)
 
-    # appends message sent by bot itself - the very first message: start message
-    INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
+        menu = build_menu(button_list, n_cols=1, header_buttons=None, footer_buttons=None)
 
-    return AFTER_CONSENT
+        # set up INFOSTORE
+        INFOSTORE[user.id] = {}
+        INFOSTORE[user.id]["BotMessageID"] = []
+
+        msgsent = bot.send_message(text=mainmenutext,
+                                   chat_id=chatid,
+                                   reply_markup=InlineKeyboardMarkup(menu),
+                                   parse_mode=ParseMode.HTML)
+
+        # appends message sent by bot itself - the very first message: start message
+        INFOSTORE[user.id]["BotMessageID"].append(msgsent['message_id'])
+
+        return AFTER_CONSENT
 
 
 def send_to_parent(bot, update):

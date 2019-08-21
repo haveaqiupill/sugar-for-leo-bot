@@ -251,7 +251,7 @@ delwyn = User(DELWYN, YUCHEN, KENNEDY, "Fruits (Preferably easy to eat)", "High 
               "2",
               "Delwyn")
 
-kennedy = User(KENNEDY, DELYWN, DOREEN, "Impress me (-:", "Nothing in particular!", "No no to pranks that make me have to clean up the entire room pls, minor ones r fine or live pests or rodents",
+kennedy = User(KENNEDY, DELWYN, DOREEN, "Impress me (-:", "Nothing in particular!", "No no to pranks that make me have to clean up the entire room pls, minor ones r fine or live pests or rodents",
                "#14-09",
                "3",
                "Kennedy Wong")

@@ -73,6 +73,8 @@ class User:
 keryin = User(KERYIN, JINGYING, SHAHEEL)
 jingying = User(JINGYING, SHAHEEL, KERYIN)
 shaheel = User(SHAHEEL, KERYIN, JINGYING)
+yingqi = User(YINGQI, PRISCILIA, SHAHEEL)
+priscilia = User(PRISCILIA, SHAHEEL, YINGQI)
 
 #KEY-VALUE PAIR
 ASSIGN = {KERYIN:keryin, JINGYING:jingying, SHAHEEL:shaheel}
@@ -201,7 +203,7 @@ def cancel(bot, update):
     logger.info("User {} cancelled the conversation.".format(user.username if user.username else user.first_name))
 
 
-    bot.send_message(text="Bye bye!" + SMILEY + "\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
+    bot.send_message(text="Bye bye!" + SMILEY + "\n\n" + "Hope to hear from you soon!\n\n" + "Press /start again to continue the convo!",
                      chat_id=user.id,
                      message_id=None,
                      parse_mode=ParseMode.HTML)

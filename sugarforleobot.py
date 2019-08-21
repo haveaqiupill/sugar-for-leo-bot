@@ -88,7 +88,6 @@ class User:
 #KERYIN
 JINGYING = 508423467
 PRISCILIA = 181854022
-BLAKE = 559780833
 AQILAH = 130512569
 YINGQI = 523934057
 ZHENGYI = 151469558
@@ -179,7 +178,7 @@ keryin = User(KERYIN, JAMESCHUA, JINGYING,
               "Yeo Ker Yin")
 
 jingying = User(JINGYING, KERYIN, BRYSON, "Bubble tea (liho brown sugar fresh milk w pearls), erm im ok w anything actually", "Idk but not too extreme pranks please D:",
-                "Please don't touch my things in my room (expensive stuffz!!) And no hair removal cream!!",
+                "Please dont touch my things in my room (expensive stuffz!!) And no hair removal cream!!",
                 "#14-12A",
                 "3",
                 "Qiu Jing Ying")
@@ -203,7 +202,7 @@ yingqi = User(YINGQI, CHLOE, DANIEL,
 priscilia = User(PRISCILIA, MICHELLE, MINGZHE, "i like cute stationery hehe, and i have a sweet tooth so, good food :-)",
                  "wah i dont like bananas, durians AND I CANNOT TAKE SPICY FOOD, no mala for me",
                  "please dont prank anything that requires much clean up or ruin my stuff haha (no dirty stuff on my bed!!) "
-                 "and i seriously hate rodents and lizards so please don't put any fakes in my vicinity D:",
+                 "and i seriously hate rodents and lizards so please dont put any fakes in my vicinity D:",
                  "#12-14",
                  "4",
                  "Priscilia Chow")
@@ -214,7 +213,7 @@ jameslee = User(JAMESLEE, GERALD, ZHENGYI, "A new friend! (optional teh peng)", 
                 "James Lee")
 
 jameschua = User(JAMESCHUA, SHAHEEL, KERYIN, "...cooking supplies? Tools? Sauces?",
-                 "Oh no... I guess rlly don't like wasabi",
+                 "Oh no... I guess rlly dont like wasabi",
                  "Please nothing that takes more than an hr to reset my room",
                  "#14-01C",
                  "4",
@@ -223,7 +222,7 @@ jameschua = User(JAMESCHUA, SHAHEEL, KERYIN, "...cooking supplies? Tools? Sauces
 laurence = User(LAURENCE, JAMESLEE, COLIN,
                 "Anything that is useful like snacks and stationary",
                 "Anything that is useless, too wasteful to throw away and takes up space like photo frame, soft toys etc",
-                "Do not enter my room. Do not prank things which are difficult to clean up (like spreading slime on the door). I've very little bandwidth this sem and may have a short temper.",
+                "Do not enter my room. Do not prank things which are difficult to clean up (like spreading slime on the door). Ive very little bandwidth this sem and may have a short temper.",
                 "#13-04",
                 "2",
                 "Laurence Lu")
@@ -241,12 +240,12 @@ jeffrey = User(JEFFREY, COLIN, YUCHEN, "Real life Pokemon", "Celery", "No smelly
                "2",
                "Jeffrey Ng")
 
-yuchen = User(YUCHEN, JEFFREY, DELWYN, "Things that help with cable management", "Scratching noises", "Don't destroy anything",
+yuchen = User(YUCHEN, JEFFREY, DELWYN, "Things that help with cable management", "Scratching noises", "Dont destroy anything",
               "#13-24",
               "2",
               "Wang Yuchen")
 
-delwyn = User(DELWYN, YUCHEN, KENNEDY, "Fruits (Preferably easy to eat)", "High sugar stuff", "Preferably nothing with too much clean up, and please don't remove anything from my room",
+delwyn = User(DELWYN, YUCHEN, KENNEDY, "Fruits (Preferably easy to eat)", "High sugar stuff", "Preferably nothing with too much clean up, and please dont remove anything from my room",
               "#14-08",
               "2",
               "Delwyn")
@@ -282,7 +281,7 @@ yifei = User(YIFEI, YUXIN, AMANDA, "Soft toy, stationery and food.",
 
 amanda = User(AMANDA, YIFEI, ZESS, "0% sugar drinks LOL.......",
               "Money",
-              "Pls don't do anything that requires me to have to spend more than 10 min cleaning up.....",
+              "Pls dont do anything that requires me to have to spend more than 10 min cleaning up.....",
               "#14-27",
               "3",
               "Amanda Xue")
@@ -297,7 +296,7 @@ zess = User(ZESS, AMANDA, HUIKUN, "anything ahhaha",
 huikun = User(HUIKUN, ZESS, CHLOE,
                    "Snacks like chips/instant noodles, cards/handmade stuff, oolong milk tea (30% sugar HAHAHA). And hit me up with some bad jokes/puns I live for them",
                    "Asymmetrical stuff, having my unglams discovered",
-               "Please don't move anything out of my room thank you!! :')",
+               "Please dont move anything out of my room thank you!! :)",
                "#12-03",
                "2",
                "Yeo Hui Kun")
@@ -344,13 +343,13 @@ zhijin = User(ZHIJIN, KANGLE, ANTHONY,
 
 anthony = User(ANTHONY, ZHIJIN, HANWEI,
                "Sugar baby, please give me a Rolex or BMW. Either will be fine",
-               "Please don't put girls around me. I'm scared of them...",
+               "Please dont put girls around me. Im scared of them...",
                "My limit is anything that requires more than 10 mins to clean up. Thanks.",
                "#14-04",
                "3",
                "Anthony Poon")
 
-hanwei = User(HANWEI, ANTHONY, HAOYU, "Surprise Me :)", "Supper, Aditya's Jokes, FOMO",
+hanwei = User(HANWEI, ANTHONY, HAOYU, "Surprise Me :)", "Supper, Adityas Jokes, FOMO",
               "Stuff to not touch: Router, Computers, Computer Chargers, Photos, Vacuum Cleaner",
               "#14-01F",
               "3",
@@ -371,15 +370,15 @@ shruti = User(SHRUTI, HAOYU, GORDON, "I like rocks of different shapes and mater
               "3",
               "Shruti")
 gordon = User(GORDON, SHRUTI, GERALD,
-              "Koi green tea macchiato and LOL (lots of laughter/love whichever u're feeling)",
+              "Koi green tea macchiato and LOL (lots of laughter/love whichever ure feeling)",
               "amins, mcd jk HAHAHA um insects i guess just not alive",
-              "no flour/glitter and my monitor and laptop and shoes they are new :')",
+              "no flour/glitter and my monitor and laptop and shoes they are new :)",
               "#13-20",
               "3",
               "Gordon Ng")
 
 gerald = User(GERALD, GORDON, JAMESLEE, "Churros, Donuts, Cookies, Chocolates",
-              "Broccoli", "Please don't move my furniture out of my room :(",
+              "Broccoli", "Please dont move my furniture out of my room :(",
               "#13-03",
               "3",
               "Gerald Ng")
@@ -399,19 +398,19 @@ galen = User(GALEN, ZHENGYI, JAY, "Gummy sweets! Sour power or yupi :)",
 
 jay = User(JAY, GALEN, YIEWMIN, "snacks",
            "sneks",
-           "Don't make a big mess. I have little time to clean.",
+           "Dont make a big mess. I have little time to clean.",
            "#13-12A",
            "2",
            "Jay")
 
 yiewmin = User(YIEWMIN, JAY, YANKAI,
                "Bubble tea 50% sugar level pls, packet drinks, canned drinks, snacks",
-               "Beans, bugs(but seriously don't put real bugs fake ones are bad enough), peas, cleaning up messes",
+               "Beans, bugs(but seriously dont put real bugs fake ones are bad enough), peas, cleaning up messes",
                "Nothing that is difficult to remove pls ie FLOUR "
-               "(I realised this is a very bad idea last year don't do it, it seems harmless but "
-               "it actually isn't once it blows into the room, even through under the door), RAW FISH (or raw anything this is just damn disgusting and the smell is really a no-go). Im OK with things that are troublesome to clean up but pls nothing that is impossible to remove apart from time"
-               " (ie really pungent smells or flour). Only these 2 come to mind but I'm sure you'll think of a lot of other stuff to do to me,"
-               "please have fun and I can't wait to see how creative you'll be. CYA SOON SUGAR PARENT!!!!",
+               "(I realised this is a very bad idea last year dont do it, it seems harmless but "
+               "it actually isnt once it blows into the room, even through under the door), RAW FISH (or raw anything this is just damn disgusting and the smell is really a no-go). Im OK with things that are troublesome to clean up but pls nothing that is impossible to remove apart from time"
+               " (ie really pungent smells or flour). Only these 2 come to mind but Im sure youll think of a lot of other stuff to do to me,"
+               "please have fun and I cant wait to see how creative youll be. CYA SOON SUGAR PARENT!!!!",
                "#13-01D",
                "3",
                "Yiew Min")
@@ -436,7 +435,7 @@ huaizhe = User(HUAIZHE, IAN, BLAKE, "anything possible",
 blake = User(BLAKE, HUAIZHE, JONATHON,
              "Nintendo switch accessories, koi, salted egg yolk flavoured stuff, gummies, milk (or milk flavoured stuff)",
              "Horror / gore stuff, oreo / coke / rootbeer(legit)",
-             "Don't dirty my plushies!!", "#13-11F",
+             "Dont dirty my plushies!!", "#13-11F",
              "3",
              "Blake Wang")
 
@@ -468,9 +467,9 @@ jianing = User(JIANING, HAZEL, YINGJIA,
                "Jianing")
 
 yingjia = User(YINGJIA, JIANING, JULIET,
-               "Project Acai (not an acai affair dat shit no gud), Koi (hazelnut milk tea 30% with pearls tq), cash works too, chalk my door nice nice if you're artistic HAHAHAH, idm some room deco (not weird/gross ones if you're thinking of a prank) e.g. plants and what not",
-               "Please don't make it hard for me to get out of bed / "
-               "my room I have 8:30ams every day and I don't even leave enough leeway to eat a proper breakfast.Also anything that "
+               "Project Acai (not an acai affair dat shit no gud), Koi (hazelnut milk tea 30% with pearls tq), cash works too, chalk my door nice nice if youre artistic HAHAHAH, idm some room deco (not weird/gross ones if youre thinking of a prank) e.g. plants and what not",
+               "Please dont make it hard for me to get out of bed / "
+               "my room I have 8:30ams every day and I dont even leave enough leeway to eat a proper breakfast.Also anything that "
                "involves a lot of clean up (a bit is fine) or dirties my room significantly.",
                "Insects, things that fly, gross or bad smelling stuff", "#12-06",
                "2",
@@ -495,7 +494,7 @@ caroline = User(CAROLINE, RACHELPOO, JEANETTE, "nice things",
                 "Caroline Leung")
 
 jeanette = User(JEANETTE, CAROLINE, RACHELONG, "can I have a kitten", "Institutionalisation, streamlining, and patriarchy",
-                "There is a bunch of tech stuff in my room sometimes please PLease do not destroy it bc pls preserve my job I am old. Please also don't plant one of my exes in my room.",
+                "There is a bunch of tech stuff in my room sometimes please PLease do not destroy it bc pls preserve my job I am old. Please also dont plant one of my exes in my room.",
                 "#14-17",
                 "3",
                 "Jeanette")
@@ -517,7 +516,7 @@ nicholas = User(NICHOLAS, RACHELONG, RAYSON,
 rayson = User(RAYSON, NICHOLAS, ADARSH, "bbt",
               "I dislike snacks",
               "no live or recently deceased animals pls, also no glitter or anything like that pls,"
-              " and pls leave the expensive personal stuff in da room pls",
+              "and pls leave the expensive personal stuff in da room pls",
               "#13-22",
               "3",
               "Rayson Lau")
@@ -551,7 +550,7 @@ yaoyuan = User(YAOYUAN, VIVIAN, AQILAH,
 aqilah = User(AQILAH, YAOYUAN, BELLA,
               "sweets. and chocolates:)",
               "bubble tea. green tea. any kind of tea. pls no gongcha/liho/MATCHA",
-              "don't touch my bear and any nursing stuffs thanks:)",
+              "dont touch my bear and any nursing stuffs thanks:)",
               "#12-20",
               "3",
               "Aqilah")

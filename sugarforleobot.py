@@ -195,7 +195,7 @@ priscilia = User(PRISCILIA, MICHELLE, MINGZHE, "i like cute stationery hehe, and
                  "4",
                  "Priscilia Chow")
 
-jameslee = User(JAMESLEE, GERALD, ZHENGYI, "A new friend! (optional teh peng)", "nothing in particular",
+jameslee = User(JAMESLEE, GERALD, LAURENCE, "A new friend! (optional teh peng)", "nothing in particular",
                 "dont enter my room and nothing hard to clean up thx :D", "#13-16",
                 "2",
                 "James Lee")
@@ -625,7 +625,7 @@ calista = User(CALISTA, JUIN, FELICIA,
 
 felicia = User(FELICIA, CALISTA, ESTHER, "pretty stationary and notebooks :)",
                "8am anything, paiseh, dairy products",
-               "no insects/creatures in my room please! and if my door is "
+               "no insects or creatures in my room please! and if my door is "
                "locked just put like a post it etc. to remind me to unlock if needed :)", "#12-17",
                "1",
                "Felicia")

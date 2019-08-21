@@ -241,7 +241,7 @@ jeffrey = User(JEFFREY, COLIN, YUCHEN, "Real life Pokemon", "Celery", "No smelly
                "2",
                "Jeffrey Ng")
 
-yuchen = User(YUCHEN, JEFFREY, DELYWN, "Things that help with cable management", "Scratching noises", "Don't destroy anything",
+yuchen = User(YUCHEN, JEFFREY, DELWYN, "Things that help with cable management", "Scratching noises", "Don't destroy anything",
               "#13-24",
               "2",
               "Wang Yuchen")

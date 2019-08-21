@@ -410,9 +410,11 @@ yiewmin = User(YIEWMIN, JAY, YANKAI,
                "Nothing that is difficult to remove pls ie FLOUR "
                "(I realised this is a very bad idea last year don't do it, it seems harmless but "
                "it actually isn't once it blows into the room, even through under the door), RAW FISH (or raw anything this is just damn disgusting and the smell is really a no-go). Im OK with things that are troublesome to clean up but pls nothing that is impossible to remove apart from time"
-               " (ie really pungent smells or flour). Only these 2 come to mind but I'm sure you'll think of a lot of other stuff to do to me, "
+               " (ie really pungent smells or flour). Only these 2 come to mind but I'm sure you'll think of a lot of other stuff to do to me,"
                "please have fun and I can't wait to see how creative you'll be. CYA SOON SUGAR PARENT!!!!",
-               "#13-01D")
+               "#13-01D",
+               "3",
+               "Yiew Min")
 
 yankai = User(YANKAI, YIEWMIN, IAN, "Food and boardgames", "Work. And insects.",
               "No room movement please", "#13-11B",

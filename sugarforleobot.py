@@ -383,7 +383,8 @@ gerald = User(GERALD, GORDON, JAMESLEE, "Churros, Donuts, Cookies, Chocolates",
               "3",
               "Gerald Ng")
 
-zhengyi = User(ZHENGYI, JAMESLEE, GALEN, "Hard Liquor, Nintendo Switch, New Mahjong Set", "dolls",
+zhengyi = User(ZHENGYI, JAMESLEE, GALEN, "Hard Liquor, Nintendo Switch, New Mahjong Set",
+               "dolls",
                "dont touch my desktop or pc or monitor setup thanks",
                "#13-11D",
                "3",

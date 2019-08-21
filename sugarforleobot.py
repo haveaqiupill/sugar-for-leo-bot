@@ -145,8 +145,8 @@ def send_to_baby(bot, update):
     babyID = ASSIGN.get(user.id).get_babyid()
     baby = ASSIGN.get(babyID)
 
-    sendtext = HEART + "<b>Here are the likes of your sugar baby:</b> \n" + baby.get_likes() + HEART + "\n\n"
-    sendtext += CROSS + "<b>Here are the dislikes of your sugar baby:</b> \n" + baby.get_dislikes() + CROSS + "\n\n"
+    sendtext = HEART + "<b>Here are the likes of your sugar baby:</b> \n" + HEART + baby.get_likes()  + "\n\n"
+    sendtext += CROSS + "<b>Here are the dislikes of your sugar baby:</b> \n" + CROSS + baby.get_dislikes()  + "\n\n"
     sendtext += "<b>What do you want to tell your sugar baby?</b>" + "\n\nType and send me your message below:"
 
     bot.send_message(chat_id=user.id, text=sendtext, parse_mode=ParseMode.HTML)

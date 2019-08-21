@@ -379,7 +379,7 @@ zhengyi = User(ZHENGYI, JAMESLEE, GALEN,
                "3",
                "Wong Zhengyi")
 
-galen = User(GALEN, ZHENGYI, JAY, "Gummy sweets! Sour power or yupi :)",
+galen = User(GALEN, ZHENGYI, JAY, "Gummy sweets! Sour power or yupi",
              "No glitter, slime or raw fish pls",
              "Pls dont touch my valuables or pillow TY",
              "#13-08",
@@ -457,11 +457,13 @@ jianing = User(JIANING, HAZEL, YINGJIA,
                "Jianing")
 
 yingjia = User(YINGJIA, JIANING, JULIET,
-               "Project Acai (not an acai affair dat shit no gud), Koi (hazelnut milk tea 30% with pearls tq), cash works too, chalk my door nice nice if youre artistic HAHAHAH, idm some room deco (not weird/gross ones if youre thinking of a prank) e.g. plants and what not",
-               "Please dont make it hard for me to get out of bed / "
-               "my room I have 8:30ams every day and I dont even leave enough leeway to eat a proper breakfast.Also anything that "
+               "Project Acai (not an acai affair dat shit no gud), Koi (hazelnut milk tea 30% with pearls tq), cash works too, chalk my door nice nice if youre artistic HAHAHAH, "
+               "idm some room deco (not weird or gross ones if youre thinking of a prank) e.g. plants and what not",
+               "Please dont make it hard for me to get out of bed or "
+               "my room I have 8:30ams every day and I dont even leave enough leeway to eat a proper breakfast. Also anything that "
                "involves a lot of clean up (a bit is fine) or dirties my room significantly.",
-               "Insects, things that fly, gross or bad smelling stuff", "#12-06",
+               "Insects, things that fly, gross or bad smelling stuff",
+               "#12-06",
                "2",
                "Zhang Yingjia")
 
@@ -473,7 +475,8 @@ juliet = User(JULIET, YINGJIA, RACHELPOO, "KOI and pls be my friend", "Useless F
 rachelpoo = User(RACHELPOO, JULIET, CAROLINE,
                  "decorative stuff, cute stuff, food, bbt, useful essentials",
                  "vegetables, sharp objects, useless stuff, sour food",
-                 "dont spoil, steal or hide my stuff (beyond finding)", "#14-23",
+                 "dont spoil, steal or hide my stuff (beyond finding)",
+                 "#14-23",
                  "2",
                  "Rachel Poo")
 
@@ -697,7 +700,7 @@ juin = User(JUIN, POR, CALISTA, "anything", "things other than anything",
 
 
 #KEY-VALUE PAIR
-ASSIGN = { SHAHEEL:shaheel, YINGQI:yingqi, PRISCILIA:priscilia, JAMESLEE:jameslee, JAMESCHUA:jameschua,
+ASSIGN = {SHAHEEL:shaheel, YINGQI:yingqi, PRISCILIA:priscilia, JAMESLEE:jameslee, JAMESCHUA:jameschua,
 BLAKE:blake, AQILAH:aqilah, ZHENGYI:zhengyi, FELICIA:felicia, SHAOCONG:shaocong, MINGHUI:minghui, SHAE:shae,
 THERESA:theresa, JUIN:juin, CAROLINE:caroline, HUIKUN:huikun, HUAIZHE:huaizhe, JEFFREY:jeffrey, HAOYU:haoyu, GLEN:glen,
 TJIONGHANN:tjionghann, RACHELPOO:rachelpoo, YUCHEN:yuchen, JIANING:jianing, SHRUTI:shruti, HANWEI:hanwei, BENJAMIN:benjamin,

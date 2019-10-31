@@ -10,3 +10,8 @@ The commands that the bot supports are:
    
    You can choose to talk to your sugar parent(whom you will not know the identity of) or sugar baby(the bot will provide you with information regarding your assigned sugar baby such as likes, dislikes, room number, etc)
 - `cancel`: stop using the bot
+
+## Continuation
+The next house committee can add on further improvements to this bot for the Sugar for Leo events in the following years. Do note that this bot is a 5-day solo project so it's features are pretty limited :cry: 
+
+Some suggestions are to include sticker sending and picture sending features!

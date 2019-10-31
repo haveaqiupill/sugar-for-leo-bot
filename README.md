@@ -6,10 +6,10 @@ The bot was created to help facilitate communication between Sugar Daddy/Mummy(A
 ![alt text](https://github.com/haveaqiupill/sugarforleobot/blob/master/Sugar%20for%20Leo.jpg)
 
 The commands that the bot supports are:
-- `start`: start using the bot!
+- `/start`: start using the bot!
    
    You can choose to talk to your sugar parent(whom you will not know the identity of) or sugar baby(the bot will provide you with information regarding your assigned sugar baby such as likes, dislikes, room number, etc)
-- `cancel`: stop using the bot
+- `/cancel`: stop using the bot
 
 ## Tech Stack
 - Heroku

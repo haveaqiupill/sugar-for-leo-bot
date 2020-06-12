@@ -3,7 +3,14 @@
 ## Sugar for Leo 2019
 The bot was created to help facilitate communication between Sugar Daddy/Mummy(Angels) and Sugar Baby(Mortals) during Leo's Sugar for Leo event in August 2019. 
 
-![alt text](https://github.com/haveaqiupill/sugarforleobot/blob/master/Sugar%20for%20Leo.jpg)
+<p align="center">
+   <b> Screenshot of Bot Interface <b>
+</p>
+
+<p align="center">
+   <img alt="Screenshot of Telegram Bot" align="center" src="https://github.com/haveaqiupill/sugarforleobot/blob/master/Sugar%20for%20Leo.jpg" width="600">
+</p>
+
 
 The commands that the bot supports are:
 - `/start`: start using the bot!

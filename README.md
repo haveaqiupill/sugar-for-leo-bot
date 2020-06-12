@@ -4,7 +4,7 @@
 The bot was created to help facilitate communication between Sugar Daddy/Mummy(Angels) and Sugar Baby(Mortals) during Leo's Sugar for Leo event in August 2019. 
 
 <p align="center">
-   <b> Screenshot of Bot Interface <b>
+   <b> Screenshot of Bot Interface </b>
 </p>
 
 <p align="center">
